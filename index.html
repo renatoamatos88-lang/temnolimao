@@ -819,77 +819,113 @@ tr:hover td { background: #faf9f0; }
     <div class="adm-body">
       <div class="adm-sidebar">
         <div class="adm-nav-lbl">Geral</div>
-        <button class="adm-nav-link active" onclick="admNav(this,'dash')">📊 Dashboard</button>
+        <button class="adm-nav-link active" data-sec="dash" onclick="admNav(this,'dash')">📊 Dashboard</button>
         <div class="adm-nav-lbl">Conteúdo</div>
-        <button class="adm-nav-link" onclick="admNav(this,'negs')">🏪 Negócios</button>
-        <button class="adm-nav-link" onclick="admNav(this,'vags')">💼 Vagas</button>
-        <button class="adm-nav-link" onclick="admNav(this,'nots')">📰 Notícias</button>
-        <button class="adm-nav-link" onclick="admNav(this,'pods')">🎙️ Podcast</button>
+        <button class="adm-nav-link" data-sec="negs" onclick="admNav(this,'negs')">🏪 Negócios</button>
+        <button class="adm-nav-link" data-sec="vags" onclick="admNav(this,'vags')">💼 Vagas</button>
+        <button class="adm-nav-link" data-sec="pods" onclick="admNav(this,'pods')">🎙️ Podcast</button>
+        <button class="adm-nav-link" data-sec="nots" onclick="admNav(this,'nots')">📰 Notícias</button>
+        <button class="adm-nav-link" data-sec="deps" onclick="admNav(this,'deps')">💬 Depoimentos</button>
         <div class="adm-nav-lbl">Config</div>
-        <button class="adm-nav-link" onclick="admNav(this,'cfg')">⚙️ Configurações</button>
+        <button class="adm-nav-link" data-sec="cfg" onclick="admNav(this,'cfg')">⚙️ Configurações</button>
       </div>
       <div class="adm-content">
         <!-- DASH -->
         <div class="adm-sec active" id="adm-dash">
           <div class="adm-sec-title">Dashboard</div>
-          <div class="adm-sec-sub">Visão geral do Tem no Limão</div>
-          <div class="adm-stats-row">
-            <div class="adm-stat-box"><div class="n">200+</div><div class="l">Negócios</div></div>
-            <div class="adm-stat-box"><div class="n">12k</div><div class="l">Moradores</div></div>
-            <div class="adm-stat-box"><div class="n">12</div><div class="l">Podcasts</div></div>
-            <div class="adm-stat-box"><div class="n">4</div><div class="l">Vagas</div></div>
-            <div class="adm-stat-box"><div class="n">5</div><div class="l">Depoimts</div></div>
-            <div class="adm-stat-box"><div class="n">3</div><div class="l">Notícias</div></div>
+          <div class="adm-sec-sub">Visão geral e acesso rápido</div>
+          <div class="adm-stats-row" id="dash-stats"></div>
+          <div style="background:white;border-radius:.875rem;border:1px solid var(--cream2);padding:1.5rem;margin-top:1rem">
+            <div style="font-weight:700;font-size:.9rem;color:var(--dark);margin-bottom:1rem">⚡ Ações rápidas</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.6rem">
+              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=negs]'),'negs');newNeg()">+ Negócio</button>
+              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=vags]'),'vags');newVag()">+ Vaga</button>
+              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=pods]'),'pods');newPod()">+ Podcast</button>
+              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=nots]'),'nots');newNot()">+ Notícia</button>
+              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=deps]'),'deps');newDep()">+ Depoimento</button>
+            </div>
           </div>
         </div>
+
         <!-- NEGÓCIOS -->
         <div class="adm-sec" id="adm-negs">
           <div class="adm-sec-title">Negócios</div>
           <div class="adm-sec-sub">Gerencie o diretório de negócios do bairro</div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span>6 negócios cadastrados</span><button class="adm-add-btn" onclick="openModal('neg')">+ Novo negócio</button></div>
-            <table><thead><tr><th>Nome</th><th>Categoria</th><th>Endereço</th><th>Status</th><th>Ações</th></tr></thead><tbody id="tbl-negs"></tbody></table>
+            <div class="adm-table-head"><span id="cnt-negs"></span><button class="adm-add-btn" onclick="newNeg()">+ Novo negócio</button></div>
+            <table><thead><tr><th>Nome</th><th>Categoria</th><th>Endereço</th><th>Contato</th><th>Ações</th></tr></thead><tbody id="tbl-negs"></tbody></table>
           </div>
         </div>
+
         <!-- VAGAS -->
         <div class="adm-sec" id="adm-vags">
-          <div class="adm-sec-title">Vagas</div>
+          <div class="adm-sec-title">Vagas de Emprego</div>
           <div class="adm-sec-sub">Gerencie oportunidades publicadas</div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span>4 vagas ativas</span><button class="adm-add-btn" onclick="openModal('vag')">+ Nova vaga</button></div>
+            <div class="adm-table-head"><span id="cnt-vags"></span><button class="adm-add-btn" onclick="newVag()">+ Nova vaga</button></div>
             <table><thead><tr><th>Cargo</th><th>Empresa</th><th>Tipo</th><th>Salário</th><th>Ações</th></tr></thead><tbody id="tbl-vags"></tbody></table>
           </div>
         </div>
-        <!-- NOTÍCIAS -->
-        <div class="adm-sec" id="adm-nots">
-          <div class="adm-sec-title">Notícias</div>
-          <div class="adm-sec-sub">Gerencie publicações e jornalismo local</div>
-          <div class="adm-table-card">
-            <div class="adm-table-head"><span>3 notícias publicadas</span><button class="adm-add-btn" onclick="openModal('not')">+ Nova notícia</button></div>
-            <table><thead><tr><th>Título</th><th>Categoria</th><th>Data</th><th>Ações</th></tr></thead><tbody id="tbl-nots"></tbody></table>
-          </div>
-        </div>
+
         <!-- PODCAST -->
         <div class="adm-sec" id="adm-pods">
           <div class="adm-sec-title">Podcast</div>
           <div class="adm-sec-sub">Gerencie episódios do Podcast do Limão</div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span>4 episódios</span><button class="adm-add-btn" onclick="openModal('pod')">+ Novo episódio</button></div>
-            <table><thead><tr><th>Ep</th><th>Título</th><th>Convidado</th><th>Duração</th><th>Ações</th></tr></thead><tbody id="tbl-pods"></tbody></table>
+            <div class="adm-table-head"><span id="cnt-pods"></span><button class="adm-add-btn" onclick="newPod()">+ Novo episódio</button></div>
+            <table><thead><tr><th>Ep</th><th>Título</th><th>Convidado(a)</th><th>Duração</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-pods"></tbody></table>
           </div>
         </div>
-        <!-- CONFIG -->
+
+        <!-- NOTÍCIAS -->
+        <div class="adm-sec" id="adm-nots">
+          <div class="adm-sec-title">Notícias</div>
+          <div class="adm-sec-sub">Gerencie publicações e jornalismo local</div>
+          <div class="adm-table-card">
+            <div class="adm-table-head"><span id="cnt-nots"></span><button class="adm-add-btn" onclick="newNot()">+ Nova notícia</button></div>
+            <table><thead><tr><th>Título</th><th>Categoria</th><th>Data</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-nots"></tbody></table>
+          </div>
+        </div>
+
+        <!-- DEPOIMENTOS -->
+        <div class="adm-sec" id="adm-deps">
+          <div class="adm-sec-title">Depoimentos</div>
+          <div class="adm-sec-sub">Avaliações de moradores e empreendedores</div>
+          <div class="adm-table-card">
+            <div class="adm-table-head"><span id="cnt-deps"></span><button class="adm-add-btn" onclick="newDep()">+ Novo depoimento</button></div>
+            <table><thead><tr><th>Pessoa</th><th>Perfil</th><th>Depoimento</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-deps"></tbody></table>
+          </div>
+        </div>
+
+        <!-- CONFIGURAÇÕES -->
         <div class="adm-sec" id="adm-cfg">
           <div class="adm-sec-title">Configurações</div>
-          <div class="adm-sec-sub">Dados gerais da plataforma</div>
-          <div class="adm-table-card" style="padding:1.75rem">
-            <div class="fg"><label>Nome do site</label><input type="text" value="Tem no Limão"></div>
-            <div class="fg"><label>WhatsApp</label><input type="text" value="+55 11 98359-2721"></div>
-            <div class="fg"><label>E-mail</label><input type="text" value="oi@temnolimao.com.br"></div>
-            <div class="fg"><label>Instagram</label><input type="text" value="@temnolimao"></div>
-            <div class="fg"><label>TikTok</label><input type="text" value="@temnolimao"></div>
-            <div class="fg"><label>Descrição curta</label><textarea rows="2">O guia definitivo dos negócios, serviços e acontecimentos do bairro do Limão, São Paulo.</textarea></div>
-            <div style="margin-top:1rem"><button class="modal-save" onclick="alert('Salvo com sucesso!')">💾 Salvar alterações</button></div>
+          <div class="adm-sec-sub">Dados gerais, redes sociais e segurança da plataforma</div>
+          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem">
+            <div style="font-weight:700;font-size:.88rem;margin-bottom:1rem;color:var(--dark)">📱 Contato & Redes Sociais</div>
+            <div class="fg-row">
+              <div class="fg"><label>WhatsApp principal (só números)</label><input type="text" id="cfg-wpp" placeholder="+55 11 98359-2721"></div>
+              <div class="fg"><label>E-mail</label><input type="text" id="cfg-email" placeholder="oi@temnolimao.com.br"></div>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label>Instagram (@usuario)</label><input type="text" id="cfg-instagram" placeholder="@temnolimao"></div>
+              <div class="fg"><label>TikTok (@usuario)</label><input type="text" id="cfg-tiktok" placeholder="@temnolimao"></div>
+            </div>
+            <div class="fg"><label>YouTube (@usuario)</label><input type="text" id="cfg-youtube" placeholder="@temnolimao110"></div>
+            <div class="fg"><label>Descrição do site</label><textarea id="cfg-desc" rows="2">O guia definitivo dos negócios, serviços e acontecimentos do bairro do Limão, São Paulo.</textarea></div>
+          </div>
+          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem">
+            <div style="font-weight:700;font-size:.88rem;margin-bottom:1rem;color:var(--dark)">🔐 Segurança</div>
+            <div class="fg"><label>Nova senha do painel admin</label><input type="password" id="cfg-senha" placeholder="Deixe em branco para manter a atual"></div>
+            <p style="font-size:.75rem;color:#999;margin-top:.25rem">Senha atual: <code style="background:#f0f0f0;padding:.1rem .4rem;border-radius:.3rem">limao2024</code></p>
+          </div>
+          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem;border-left:3px solid #e74c3c">
+            <div style="font-weight:700;font-size:.88rem;margin-bottom:.5rem;color:#c0392b">⚠️ Zona de perigo</div>
+            <p style="font-size:.82rem;color:#888;margin-bottom:1rem">Apaga todas as alterações feitas no admin e restaura os dados originais do site.</p>
+            <button onclick="resetData()" style="padding:.6rem 1.5rem;background:#e74c3c;color:white;border:none;border-radius:2rem;font-weight:700;font-size:.82rem;cursor:pointer">🗑️ Restaurar dados originais</button>
+          </div>
+          <div style="margin-top:1.25rem">
+            <button class="modal-save" onclick="salvarConfig()">💾 Salvar configurações</button>
           </div>
         </div>
       </div>
@@ -1012,7 +1048,7 @@ tr:hover td { background: #faf9f0; }
     <div class="tnl-filter-bar" id="filter-bar"></div>
     <div class="tnl-businesses-grid" id="cards-grid"></div>
     <div class="tnl-load-more-wrap">
-      <button class="tnl-btn-outline" onclick="alert('Mais negócios em breve!')">Carregar mais</button>
+      <button class="tnl-btn-outline" onclick="carregarMais()">Carregar mais</button>
     </div>
   </section>
 
@@ -1231,48 +1267,55 @@ tr:hover td { background: #faf9f0; }
 
 <script>
 // ── DATA ──────────────────────────────────────────
-const SENHA = 'limao2024';
 const LOGO = 'https://framerusercontent.com/images/dSLTmNueZlnBEjTItOvC8wBsvg.png';
 const BASE = 'https://dizzy-hug-77416784.figma.site';
 
-const negocios = [
-  { id:1, nome:'Migui', cat:'Materiais Elétricos', desc:'Materiais elétricos, ferramentas e soluções para obra e manutenção do seu lar.',
-    logo: BASE+'/_assets/v11/84ce72b20311b61ebeae8e5291956c03f4fc7a97.png', logoCls:'lg dark',
-    end:'Av. Mandaqui, 46 - Limão', hora:'Seg–Sex 8h–18h · Sáb 8h–13h', tipo:'wpp', wpp:'5511977631776' },
-  { id:2, nome:'Fridali Shop', cat:'Jóias / Acessórios', desc:'Joalheria contemporânea com peças únicas e acessórios de alto padrão.',
-    logo: BASE+'/_assets/v11/1662f800e0290a98fd7f7eed9f5e92c14d087ffc.png', logoCls:'lg',
-    end:'24h — Loja Online', hora:'Todos os dias', tipo:'site', siteUrl:'https://www.fridalishop.com' },
-  { id:3, nome:'Compre Mais', cat:'Supermercado', desc:'Supermercado com 4 unidades no bairro. Tudo que você precisa perto de casa.',
-    logo: BASE+'/_assets/v11/fe53c43af56d92b930b1574c4943c29a5c0dc9f2.png', logoCls:'',
-    end:'Rua Firminópolis, 223 - Jd. Vista Alegre', hora:'Todos os dias 7h–22h', tipo:'wpp', wpp:'5511982418180' },
-  { id:4, nome:'Pseq', cat:'Saúde', desc:'Clínica de saúde com atendimento especializado para toda a família.',
-    logo: BASE+'/_assets/v11/f3bcd75236d0c94838feabb73f3374ea31fdcdbc.png', logoCls:'',
-    end:'Rua José Kileber, 242 - Limão', hora:'Seg–Sex 8h–18h', tipo:'wpp', wpp:'5511953395484' },
-  { id:5, nome:'Dom Capuchon', cat:'Alimentação', desc:'Gastronomia artesanal com duas unidades. Sabores únicos que conquistam o paladar.',
-    logo: BASE+'/_assets/v11/8d35fc64c5b6cea5a359b760d6dde8ce3e936930.png', logoCls:'',
-    end:'Rua Jaboatão, 180 - Casa Verde', hora:'Ter–Dom 11h–22h', tipo:'wpp', wpp:'551127743746' },
-  { id:6, nome:'Van Gogh', cat:'Educação', desc:'Escola criativa que desenvolve o potencial artístico e educacional dos alunos.',
-    logo: BASE+'/_assets/v11/ae55443dc3f3dcf892af5553e13dcda3c2dd85a6.png', logoCls:'',
-    end:'Rua Atenágoras, 99 - Limão', hora:'Seg–Sex 7h–18h · Sáb 8h–12h', tipo:'wpp', wpp:'551139661622' },
+let negocios = [
+  { id:1,  nome:'Migui',              cat:'Materiais Elétricos', desc:'Materiais elétricos, ferramentas e soluções para obra e manutenção do seu lar.',                              logo: BASE+'/_assets/v11/84ce72b20311b61ebeae8e5291956c03f4fc7a97.png',  logoCls:'lg',      end:'Av. Mandaqui, 46 - Limão',                           hora:'Seg–Sex 8h–18h · Sáb 8h–13h',     tipo:'wpp', wpp:'5511977631776' },
+  { id:2,  nome:'Fridali Shop',       cat:'Jóias / Acessórios',  desc:'Joalheria contemporânea com peças únicas e acessórios de alto padrão para todos os estilos.',               logo: BASE+'/_assets/v11/1662f800e0290a98fd7f7eed9f5e92c14d087ffc.png', logoCls:'lg',      end:'24h — Loja Online',                                  hora:'Todos os dias',                    tipo:'site', siteUrl:'https://www.fridalishop.com' },
+  { id:3,  nome:'Compre Mais',        cat:'Supermercado',        desc:'Supermercado com 4 unidades no bairro. Tudo que você precisa perto de casa.',                                logo: BASE+'/_assets/v11/fe53c43af56d92b930b1574c4943c29a5c0dc9f2.png', logoCls:'',        end:'Rua Firminópolis, 223 - Jd. Vista Alegre',           hora:'Todos os dias 7h–22h',             tipo:'wpp', wpp:'5511982418180' },
+  { id:4,  nome:'Pseq',               cat:'Saúde',               desc:'Clínica de saúde com atendimento especializado para toda a família.',                                        logo: BASE+'/_assets/v11/f3bcd75236d0c94838feabb73f3374ea31fdcdbc.png', logoCls:'',        end:'Rua José Kileber, 242 - Limão',                      hora:'Seg–Sex 8h–18h',                   tipo:'wpp', wpp:'5511953395484' },
+  { id:5,  nome:'Dom Capuchon',       cat:'Alimentação',         desc:'Gastronomia artesanal com duas unidades. Sabores únicos que conquistam o paladar.',                         logo: BASE+'/_assets/v11/8d35fc64c5b6cea5a359b760d6dde8ce3e936930.png', logoCls:'',        end:'Rua Jaboatão, 180 - Casa Verde',                     hora:'Ter–Dom 11h–22h',                  tipo:'wpp', wpp:'551127743746' },
+  { id:6,  nome:'Van Gogh',           cat:'Educação',            desc:'Escola criativa que desenvolve o potencial artístico e educacional dos alunos.',                            logo: BASE+'/_assets/v11/ae55443dc3f3dcf892af5553e13dcda3c2dd85a6.png', logoCls:'',        end:'Rua Atenágoras, 99 - Limão',                         hora:'Seg–Sex 7h–18h · Sáb 8h–12h',     tipo:'wpp', wpp:'551139661622' },
+  { id:7,  nome:'Camargo',            cat:'Serviços',            desc:'Serviços de despachante para veículos, documentação e processos administrativos.',                          logo: BASE+'/_assets/v11/6d9490c072861e9a50aa35a9cb59769401da9721.png',  logoCls:'lg',      end:'Av. Deputado Emílio Carlos, 2369',                   hora:'Seg–Sex 9h–17h',                   tipo:'wpp', wpp:'5511955400139' },
+  { id:8,  nome:'Doce Mordida',       cat:'Alimentação',         desc:'Doceria artesanal com bolos, brigadeiros e sobremesas irresistíveis.',                                      logo: '',                                                                logoCls:'',        end:'Av. Nossa Senhora do Ó, 565 - Limão',                hora:'Ter–Dom 10h–20h',                  tipo:'wpp', wpp:'5511988813637' },
+  { id:9,  nome:'Dra Mayte Peres',    cat:'Estética',            desc:'Clínica de estética com tratamentos faciais e corporais de alto padrão.',                                   logo: BASE+'/_assets/v11/8fc8a430165053c4cb7edbfd14b5c445add05f12.png', logoCls:'',        end:'Av. Nossa Senhora do Ó, 865 - Limão',                hora:'Seg–Sex 9h–18h · Sáb 9h–14h',     tipo:'wpp', wpp:'5511915859882' },
+  { id:10, nome:'Felix e Navarro',    cat:'Serviços',            desc:'Imobiliária especializada no Limão. Compra, venda e locação de imóveis.',                                  logo: BASE+'/_assets/v11/096031269086cd196f66e065905e7cf5b643394f.png', logoCls:'',        end:'Av. Imirim, 4683 - Limão',                           hora:'Seg–Sex 9h–18h · Sáb 9h–13h',     tipo:'wpp', wpp:'551139845900' },
+  { id:11, nome:'Arnaldo Personal',   cat:'Academia',            desc:'Personal trainer com programas personalizados de treino e condicionamento físico.',                         logo: '',                                                                logoCls:'',        end:'',                                                   hora:'Seg–Sáb 6h–21h',                   tipo:'wpp', wpp:'5511975240598' },
+  { id:12, nome:'Lift',               cat:'Academia',            desc:'Academia completa com musculação, aulas coletivas e acompanhamento profissional.',                          logo: BASE+'/_assets/v11/66b3667bf14b5b87c11a1af8e1da81717038cd9e.png', logoCls:'',        end:'Rua Paulo Vidigal Vicente de Azevedo, 17 - Limão',   hora:'Seg–Sex 6h–22h · Sáb 8h–16h',     tipo:'wpp', wpp:'5511963797955' },
+  { id:13, nome:'Miranda Odontologia',cat:'Saúde',               desc:'Clínica odontológica completa. Cuide do seu sorriso com quem é do bairro.',                                logo: BASE+'/_assets/v11/93b61b294e9aaaca1bacab08f62a53c00a568a7b.png', logoCls:'lg',      end:'Av. Deputado Emílio Carlos, 170 - Limão',            hora:'Seg–Sex 8h–18h · Sáb 8h–12h',     tipo:'wpp', wpp:'5511945357126' },
+  { id:14, nome:'SOS Parabéns',       cat:'Eventos',             desc:'Organização de festas e eventos com decoração criativa para momentos inesquecíveis.',                      logo: BASE+'/_assets/v11/73c8471f8f0c2e835fec19ca07b922169836677f.png', logoCls:'lg',      end:'Av. Antonio Munhoz Bonilha, 357 - Vila Palmeiras',   hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511942229587' },
+  { id:15, nome:'CVC Limão',          cat:'Serviços',            desc:'Agência de viagens com os melhores pacotes nacionais e internacionais.',                                    logo: BASE+'/_assets/v11/f5d51d5569c05c2c6f878e2fe9899ee5a460a636.png', logoCls:'',        end:'Av. Nossa Senhora do Ó, 565 - Limão',                hora:'Seg–Sex 9h–18h · Sáb 9h–13h',     tipo:'wpp', wpp:'5511985580459' },
+  { id:16, nome:'Evolution',          cat:'Serviços',            desc:'Criação de identidade visual, fachadas, banners e materiais gráficos para negócios.',                      logo: BASE+'/_assets/v11/42eb4ed1712e622c1d2058b2d3fe2756fcea235b.png', logoCls:'lg',      end:'Av. Nossa Senhora do Ó, 161 - Limão',                hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511940209437' },
+  { id:17, nome:'Dias Gomes',         cat:'Saúde',               desc:'Clínica de saúde com atendimento humanizado e equipe de especialistas dedicados.',                         logo: BASE+'/_assets/v11/ced268ad9410b87b826acef08a36a72925916c3f.png', logoCls:'lg',      end:'Rua Roque de Morais, 131 - Limão',                   hora:'Seg–Sex 8h–18h',                   tipo:'wpp', wpp:'5511947425564' },
+  { id:18, nome:'ACM',                cat:'Academia',            desc:'Espaço esportivo completo com musculação, esportes coletivos e atividades recreativas.',                   logo: BASE+'/_assets/v11/57ce6a84ecb4c66ac53e672a4172ecc0b269985c.png', logoCls:'',        end:'Rua José Amato, 39 - Jardim das Laranjeiras',        hora:'Seg–Sex 7h–22h · Sáb–Dom 8h–18h', tipo:'wpp', wpp:'551139595050' },
+  { id:19, nome:'Esperia',            cat:'Academia',            desc:'Clube esportivo tradicional com décadas de história e infraestrutura completa.',                           logo: BASE+'/_assets/v11/eb4f44c68758114506d29ae644ba5ec36cddeb29.png', logoCls:'lg',      end:'Av. Santos Dumont, 1313 - Santana',                  hora:'Seg–Sex 7h–22h · Sáb–Dom 8h–18h', tipo:'wpp', wpp:'551122233300' },
+  { id:20, nome:'Will Smartcell',     cat:'Tecnologia',          desc:'Assistência técnica e venda de smartphones, acessórios e eletrônicos.',                                    logo: BASE+'/_assets/v11/83e3ce1e114b9bb75bd2ced4074469025dc68cb2.png', logoCls:'',        end:'Av. Deputado Emílio Carlos, 554 - Limão',            hora:'Seg–Sex 9h–18h · Sáb 9h–14h',     tipo:'wpp', wpp:'5511960381591' },
+  { id:21, nome:'Zani Adv',           cat:'Serviços',            desc:'Escritório de advocacia com atendimento personalizado em diversas áreas do direito.',                      logo: '',                                                                logoCls:'',        end:'Av. Nossa Senhora do Ó, 565 - Limão',                hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511958174412' },
+  { id:22, nome:'Limão Fest',         cat:'Eventos',             desc:'Produção de eventos culturais e festas que animam e conectam o bairro do Limão.',                          logo: '',                                                                logoCls:'',        end:'',                                                   hora:'Seg–Sex 10h–19h',                  tipo:'wpp', wpp:'5511948586666' },
+  { id:23, nome:'Drone Horizon',      cat:'Drone',               desc:'Filmagem e fotografia aérea com drones de última geração para eventos e imóveis.',                         logo: BASE+'/_assets/v11/15168b22ddae8d0d24abe0a44fea88e26917c5e1.png', logoCls:'dark',    end:'',                                                   hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511947188409' },
+  { id:24, nome:'Cesar Ogata',        cat:'Drone',               desc:'Piloto de drone profissional para eventos, imóveis e produções audiovisuais.',                             logo: '',                                                                logoCls:'',        end:'',                                                   hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511981359276' },
+  { id:25, nome:'MRI Tecnologia',     cat:'Tecnologia',          desc:'Laboratório de TI com soluções em tecnologia para empresas. Estacionamento no local.',                     logo: BASE+'/_assets/v11/2b90b05a76e5b14e79f1571cd8a0b2b55426d50b.png', logoCls:'lg',      end:'Rua Luís Braille, 23B - Vila Bonilha',               hora:'Seg–Sex 9h–18h',                   tipo:'wpp', wpp:'5511997503529' },
 ];
+let negociosVisiveis = 6;
 
-const CATS = ['Todos','Alimentação','Saúde','Estética','Academia','Eventos','Educação','Tecnologia','Comércio','Moda','Serviços','Drone'];
+const CATS = ['Todos','Alimentação','Saúde','Estética','Academia','Eventos','Educação','Tecnologia','Serviços','Drone'];
 let catAtiva = 'Todos';
 
-const podcasts = [
+let podcasts = [
   { ep:'EP 12', titulo:'O renascimento do comércio de bairro em São Paulo', guest:'Juliana Ramos, pesquisadora urbana', dur:'48 min', data:'25 fev 2026', destaque:true },
   { ep:'EP 11', titulo:'Gastronomia local: chefs que ficaram no bairro', guest:'Marcos Capuchon, chef e empresário', dur:'36 min', data:'18 fev 2026' },
   { ep:'EP 10', titulo:'Vagas de emprego e oportunidades no Limão', guest:'RH da ACM e Compre Mais', dur:'29 min', data:'11 fev 2026' },
   { ep:'EP 09', titulo:'A história de quem fez o Limão ser o Limão', guest:'Moradores antigos do bairro', dur:'55 min', data:'4 fev 2026' },
 ];
 
-const noticias = [
+let noticias = [
   { cat:'Cultura', titulo:'Feira das Sextas completa 5 anos e se consolida como tradição no Limão', excerpt:'O evento que começou com 12 barraquinhas agora reúne mais de 80 expositores locais toda semana, movimentando a economia do bairro.', data:'15 fev 2026', leit:'4 min', featured:true },
   { cat:'Comunidade', titulo:'Moradores se mobilizam para revitalizar a Praça do Limão', excerpt:'Mutirão de voluntários planeja novo paisagismo e área de lazer para crianças.', data:'12 fev 2026', leit:'3 min' },
   { cat:'Arte', titulo:'Novo mural na Av. Imirim celebra a história do bairro', excerpt:'Artistas locais passaram três semanas pintando o painel de 40 metros.', data:'8 fev 2026', leit:'5 min' },
 ];
 
-const depoimentos = [
+let depoimentos = [
   { texto:'O Tem no Limão mudou como conheço meu bairro. Descobri lugares incríveis que ficavam a dois quarteirões de casa e nem sabia!', nome:'Ana Cristina', role:'Moradora há 12 anos', featured:true },
   { texto:'Cadastrei meu negócio e em uma semana já tinha novos clientes do bairro. Plataforma incrível, comunicação perfeita com a comunidade.', nome:'Ricardo Souza', role:'Empreendedor local' },
   { texto:'Achei a escola dos meus filhos pelo Tem no Limão. A busca por bairro facilita muito para quem não quer sair perto de casa.', nome:'Patrícia Lima', role:'Moradora e mãe' },
@@ -1280,7 +1323,7 @@ const depoimentos = [
   { texto:'Me sinto mais conectada ao bairro desde que acompanho o Tem no Limão. Não perco uma edição das notícias locais. Vale muito!', nome:'Fernanda Oliveira', role:'Comerciante' },
 ];
 
-const vagas = [
+let vagas = [
   { cargo:'Atendente de Loja', empresa:'Compre Mais', tipo:'CLT', area:'Varejo', sal:'R$ 1.800 – R$ 2.200', local:'Limão, SP', tempo:'Há 2 dias', icon:'🛒', desc:'Atendimento ao cliente, organização de prateleiras e operação de caixa. Experiência mínima de 6 meses.',
     wpp:'https://wa.me/5511983592721?text=Oi!%20Vi%20a%20vaga%20de%20Atendente%20de%20Loja%20pelo%20Tem%20no%20Lim%C3%A3o%20%F0%9F%8D%8B%20%E2%80%94%20tenho%20interesse!' },
   { cargo:'Personal Trainer', empresa:'ACM Limão', tipo:'PJ', area:'Academia', sal:'R$ 3.000 – R$ 5.000', local:'Limão, SP', tempo:'Há 3 dias', icon:'💪', desc:'Montagem de treinos personalizados e acompanhamento de alunos. CREF obrigatório.',
@@ -1300,8 +1343,19 @@ function renderFilterBar() {
 
 function setFilter(el, c) {
   catAtiva = c;
+  negociosVisiveis = 6;
   document.querySelectorAll('.tnl-filter-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
+  renderCards();
+}
+
+function getCatEmoji(cat) {
+  const map = {'Alimentação':'🍽️','Saúde':'🏥','Estética':'💆','Academia':'💪','Eventos':'🎉','Educação':'📚','Tecnologia':'💻','Comércio':'🛒','Moda':'👗','Serviços':'🔧','Drone':'🚁','Materiais Elétricos':'⚡','Supermercado':'🛒','Jóias / Acessórios':'💎','Odontologia':'🦷','Imobiliária':'🏠','Advocacia':'⚖️'};
+  return map[cat] || '🏪';
+}
+
+function carregarMais() {
+  negociosVisiveis += 6;
   renderCards();
 }
 
@@ -1309,20 +1363,28 @@ function renderCards() {
   const q = (document.getElementById('busca').value||'').toLowerCase();
   let lista = catAtiva === 'Todos' ? negocios : negocios.filter(n => n.cat === catAtiva);
   if (q) lista = lista.filter(n => n.nome.toLowerCase().includes(q) || n.cat.toLowerCase().includes(q) || n.desc.toLowerCase().includes(q));
+  const visivel = lista.slice(0, negociosVisiveis);
+  const temMais = lista.length > negociosVisiveis;
 
-  document.getElementById('cards-grid').innerHTML = lista.map(n => {
+  document.getElementById('cards-grid').innerHTML = visivel.map(n => {
     const isWpp = n.tipo === 'wpp';
     const btnCls = isWpp ? 'tnl-card-ol-wa' : 'tnl-card-ol-wa tnl-card-ol-site';
-    const btnTxt = isWpp ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chamar no WhatsApp` : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Acesse o site`;
     const btnHref = isWpp ? `https://wa.me/${n.wpp}` : (n.siteUrl||'#');
-    const metaHtml = [n.end&&`<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.end}</a>`, n.hora&&`<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${n.hora}</a>`].filter(Boolean).join('');
+    const btnTxt = isWpp
+      ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chamar no WhatsApp`
+      : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Acesse o site`;
+    const metaHtml = [
+      n.end && `<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.end}</a>`,
+      n.hora && `<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${n.hora}</a>`
+    ].filter(Boolean).join('');
+
+    const logoHtml = n.logo
+      ? `<div class="tnl-card-bg-logo ${n.logoCls}"><img src="${n.logo}" alt="${n.nome}" onerror="this.parentElement.style.background='#1a2b18'"></div>`
+      : `<div class="tnl-card-bg-logo" style="background:linear-gradient(135deg,#1a2b18,#2d4a22);display:flex;align-items:center;justify-content:center"><span style="font-size:2.8rem;opacity:.65">${getCatEmoji(n.cat)}</span></div>`;
+
     return `
     <div class="tnl-business-card">
-      <div class="tnl-card-bg">
-        <div class="tnl-card-bg-logo ${n.logoCls}">
-          <img src="${n.logo}" alt="${n.nome}" onerror="this.style.display='none'">
-        </div>
-      </div>
+      <div class="tnl-card-bg">${logoHtml}</div>
       <div class="tnl-card-badge">${n.cat}</div>
       <div class="tnl-card-strip">
         <div class="tnl-card-strip-cat">${n.cat}</div>
@@ -1337,6 +1399,10 @@ function renderCards() {
       </div>
     </div>`;
   }).join('');
+
+  // Show/hide "Carregar mais" button
+  const loadWrap = document.querySelector('.tnl-load-more-wrap');
+  if (loadWrap) loadWrap.style.display = temMais ? 'block' : 'none';
 }
 
 function renderPodcast() {
@@ -1470,77 +1536,363 @@ function renderVagas() {
     </div>`).join('');
 }
 
-// ── ADMIN ─────────────────────────────────────────
+// ── ADMIN — PERSISTÊNCIA VIA localStorage ─────────────────────────────
+
+const SENHA_KEY = 'tnl_senha';
+const DB_KEY    = 'tnl_db';
+const SENHA     = 'limao2024';
+function getSenha() { return localStorage.getItem(SENHA_KEY) || SENHA; }
+
+function carregarDB() {
+  try { const r = localStorage.getItem(DB_KEY); return r ? JSON.parse(r) : null; } catch(e) { return null; }
+}
+function salvarDB() {
+  const db = { negocios, vagas, podcasts, noticias, depoimentos, config: lerConfig() };
+  try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch(e) {}
+}
+function aplicarDB(db) {
+  if (!db) return;
+  if (db.negocios)    negocios    = db.negocios;
+  if (db.vagas)       vagas       = db.vagas;
+  if (db.podcasts)    podcasts    = db.podcasts;
+  if (db.noticias)    noticias    = db.noticias;
+  if (db.depoimentos) depoimentos = db.depoimentos;
+  if (db.config)      aplicarConfig(db.config);
+}
+
+function lerConfig() {
+  const g = id => document.getElementById(id);
+  return {
+    wpp:   g('cfg-wpp')  ?.value || '5511983592721',
+    email: g('cfg-email')?.value || 'oi@temnolimao.com.br',
+    ig:    g('cfg-ig')   ?.value || 'https://www.instagram.com/temnolimao/',
+    tt:    g('cfg-tt')   ?.value || 'https://www.tiktok.com/@temnolimao',
+    yt:    g('cfg-yt')   ?.value || 'https://www.youtube.com/@temnolimao110',
+    h1:    g('cfg-h1')   ?.value || 'Tem no Limão?',
+    h2:    g('cfg-h2')   ?.value || 'Tudo e muito mais.',
+    sub:   g('cfg-sub')  ?.value || '',
+    s1n:   g('cfg-s1n')  ?.value || '1',  s1l: g('cfg-s1l')?.value || 'Bairro',
+    s2n:   g('cfg-s2n')  ?.value || '12', s2l: g('cfg-s2l')?.value || 'Moradores',
+    s3n:   g('cfg-s3n')  ?.value || '200',s3l: g('cfg-s3l')?.value || 'Negócios',
+  };
+}
+function aplicarConfig(cfg) {
+  if (!cfg) return;
+  const g = id => document.getElementById(id);
+  if (g('cfg-wpp'))   g('cfg-wpp').value   = cfg.wpp   || '';
+  if (g('cfg-email')) g('cfg-email').value = cfg.email || '';
+  if (g('cfg-ig'))    g('cfg-ig').value    = cfg.ig    || '';
+  if (g('cfg-tt'))    g('cfg-tt').value    = cfg.tt    || '';
+  if (g('cfg-yt'))    g('cfg-yt').value    = cfg.yt    || '';
+  if (g('cfg-h1'))    g('cfg-h1').value    = cfg.h1    || '';
+  if (g('cfg-h2'))    g('cfg-h2').value    = cfg.h2    || '';
+  if (g('cfg-sub'))   g('cfg-sub').value   = cfg.sub   || '';
+  if (g('cfg-s1n'))   g('cfg-s1n').value   = cfg.s1n   || '';
+  if (g('cfg-s1l'))   g('cfg-s1l').value   = cfg.s1l   || '';
+  if (g('cfg-s2n'))   g('cfg-s2n').value   = cfg.s2n   || '';
+  if (g('cfg-s2l'))   g('cfg-s2l').value   = cfg.s2l   || '';
+  if (g('cfg-s3n'))   g('cfg-s3n').value   = cfg.s3n   || '';
+  if (g('cfg-s3l'))   g('cfg-s3l').value   = cfg.s3l   || '';
+}
+function salvarConfig() {
+  const s1 = document.getElementById('cfg-senha')?.value;
+  const s2 = document.getElementById('cfg-senha2')?.value;
+  if (s1 && s1 !== s2) { alert('As senhas não coincidem!'); return; }
+  if (s1) localStorage.setItem(SENHA_KEY, s1);
+  salvarDB(); toast('Configurações salvas! ✅');
+}
+function resetarTudo() {
+  if (!confirm('Apagar todas as alterações e restaurar dados originais?')) return;
+  localStorage.removeItem(DB_KEY); localStorage.removeItem(SENHA_KEY);
+  toast('Restaurando...', 1500); setTimeout(() => location.reload(), 1500);
+}
+
+function toast(msg, dur=2500) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  Object.assign(t.style, {
+    position:'fixed', bottom:'2rem', left:'50%', transform:'translateX(-50%)',
+    background:'var(--dark)', color:'var(--limao)', padding:'.75rem 1.5rem',
+    borderRadius:'2rem', fontWeight:'700', fontSize:'.875rem', zIndex:'999999',
+    boxShadow:'0 8px 32px rgba(0,0,0,.4)', pointerEvents:'none',
+  });
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), dur);
+}
+function nextId(arr) { return arr.length ? Math.max(...arr.map(x=>x.id||0))+1 : 1; }
+function fv(id) { const el=document.getElementById(id); return el?el.value.trim():''; }
+
 function admLogin() {
-  if (document.getElementById('adm-pwd').value === SENHA) {
+  if (document.getElementById('adm-pwd').value === getSenha()) {
     document.getElementById('adm-login-box').style.display = 'none';
     document.getElementById('adm-panel').classList.add('active');
-    renderAdmTables();
+    aplicarConfig(carregarDB()?.config);
+    renderAdmAll();
   } else {
     document.getElementById('adm-err').textContent = 'Senha incorreta.';
     document.getElementById('adm-pwd').value = '';
   }
 }
 document.getElementById('adm-pwd').addEventListener('keydown', e => { if(e.key==='Enter') admLogin(); });
-
 function admBack() {
   document.getElementById('admin-overlay').classList.remove('active');
   history.replaceState(null,'',location.pathname);
 }
 function admLogout() {
   document.getElementById('admin-overlay').classList.remove('active');
-  document.getElementById('adm-login-box').style.display = '';
+  document.getElementById('adm-login-box').style.display='';
   document.getElementById('adm-panel').classList.remove('active');
-  document.getElementById('adm-pwd').value = '';
+  document.getElementById('adm-pwd').value='';
   history.replaceState(null,'',location.pathname);
 }
 function admNav(el, id) {
-  document.querySelectorAll('.adm-nav-link').forEach(a => a.classList.remove('active'));
-  document.querySelectorAll('.adm-sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.adm-nav-link').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.adm-sec').forEach(s=>s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('adm-'+id).classList.add('active');
 }
-function renderAdmTables() {
-  document.getElementById('tbl-negs').innerHTML = negocios.map(n =>
-    `<tr><td><strong>${n.nome}</strong></td><td><span class="adm-badge adm-badge-g">${n.cat}</span></td><td style="font-size:.75rem;color:#888">${n.end}</td><td><span class="adm-badge adm-badge-g">Ativo</span></td><td><div class="adm-td-acts"><button class="adm-sm-btn">Editar</button><button class="adm-sm-btn del">Remover</button></div></td></tr>`).join('');
-  document.getElementById('tbl-vags').innerHTML = vagas.map(v =>
-    `<tr><td><strong>${v.cargo}</strong></td><td>${v.empresa}</td><td><span class="adm-badge adm-badge-${v.tipo==='CLT'?'b':'o'}">${v.tipo}</span></td><td>${v.sal}</td><td><div class="adm-td-acts"><button class="adm-sm-btn">Editar</button><button class="adm-sm-btn del">Remover</button></div></td></tr>`).join('');
-  document.getElementById('tbl-nots').innerHTML = noticias.map(n =>
-    `<tr><td><strong>${n.titulo.substring(0,48)}…</strong></td><td><span class="adm-badge adm-badge-b">${n.cat}</span></td><td>${n.data}</td><td><div class="adm-td-acts"><button class="adm-sm-btn">Editar</button><button class="adm-sm-btn del">Remover</button></div></td></tr>`).join('');
-  document.getElementById('tbl-pods').innerHTML = podcasts.map(p =>
-    `<tr><td><strong>${p.ep}</strong></td><td>${p.titulo.substring(0,42)}…</td><td style="font-size:.75rem;color:#888">${p.guest}</td><td>${p.dur}</td><td><div class="adm-td-acts"><button class="adm-sm-btn">Editar</button><button class="adm-sm-btn del">Remover</button></div></td></tr>`).join('');
+
+function renderAdmAll() {
+  renderDashStats(); renderTblNegs(); renderTblVags(); renderTblPods(); renderTblNots(); renderTblDeps();
+}
+function renderDashStats() {
+  const el = document.getElementById('dash-stats'); if(!el) return;
+  el.innerHTML = [
+    {n:negocios.length,l:'Negócios'},{n:vagas.length,l:'Vagas'},
+    {n:podcasts.length,l:'Podcasts'},{n:noticias.length,l:'Notícias'},
+    {n:depoimentos.length,l:'Depoimts'}
+  ].map(s=>`<div class="adm-stat-box"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
+}
+function renderTblNegs() {
+  const cnt=document.getElementById('cnt-negs'); if(cnt) cnt.textContent=negocios.length+' negócios';
+  document.getElementById('tbl-negs').innerHTML = negocios.map((n,i)=>`
+    <tr><td><strong>${n.nome}</strong></td>
+    <td><span class="adm-badge adm-badge-g">${n.cat}</span></td>
+    <td style="font-size:.75rem;color:#888;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.end||'—'}</td>
+    <td style="font-size:.72rem">${n.tipo==='wpp'?'📱 WPP':'🌐 Site'}</td>
+    <td><div class="adm-td-acts">
+      <button class="adm-sm-btn" onclick="editNeg(${i})">Editar</button>
+      <button class="adm-sm-btn del" onclick="delNeg(${i})">Remover</button>
+    </div></td></tr>`).join('');
+}
+function renderTblVags() {
+  const cnt=document.getElementById('cnt-vags'); if(cnt) cnt.textContent=vagas.length+' vagas';
+  document.getElementById('tbl-vags').innerHTML = vagas.map((v,i)=>`
+    <tr><td><strong>${v.cargo}</strong></td><td>${v.empresa}</td>
+    <td><span class="adm-badge adm-badge-${v.tipo==='CLT'?'b':'o'}">${v.tipo}</span></td>
+    <td style="font-size:.78rem">${v.sal}</td>
+    <td><div class="adm-td-acts">
+      <button class="adm-sm-btn" onclick="editVag(${i})">Editar</button>
+      <button class="adm-sm-btn del" onclick="delVag(${i})">Remover</button>
+    </div></td></tr>`).join('');
+}
+function renderTblPods() {
+  const cnt=document.getElementById('cnt-pods'); if(cnt) cnt.textContent=podcasts.length+' episódios';
+  document.getElementById('tbl-pods').innerHTML = podcasts.map((p,i)=>`
+    <tr><td><strong>${p.ep}</strong></td>
+    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.titulo}</td>
+    <td style="font-size:.75rem;color:#888;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.guest}</td>
+    <td>${p.dur}</td><td>${p.destaque?'⭐':'—'}</td>
+    <td><div class="adm-td-acts">
+      <button class="adm-sm-btn" onclick="editPod(${i})">Editar</button>
+      <button class="adm-sm-btn del" onclick="delPod(${i})">Remover</button>
+    </div></td></tr>`).join('');
+}
+function renderTblNots() {
+  const cnt=document.getElementById('cnt-nots'); if(cnt) cnt.textContent=noticias.length+' notícias';
+  document.getElementById('tbl-nots').innerHTML = noticias.map((n,i)=>`
+    <tr><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><strong>${n.titulo}</strong></td>
+    <td><span class="adm-badge adm-badge-b">${n.cat}</span></td>
+    <td style="font-size:.75rem">${n.data}</td><td>${n.featured?'⭐':'—'}</td>
+    <td><div class="adm-td-acts">
+      <button class="adm-sm-btn" onclick="editNot(${i})">Editar</button>
+      <button class="adm-sm-btn del" onclick="delNot(${i})">Remover</button>
+    </div></td></tr>`).join('');
+}
+function renderTblDeps() {
+  const cnt=document.getElementById('cnt-deps'); if(cnt) cnt.textContent=depoimentos.length+' depoimentos';
+  document.getElementById('tbl-deps').innerHTML = depoimentos.map((d,i)=>`
+    <tr><td><strong>${d.nome}</strong></td>
+    <td style="font-size:.78rem;color:#888">${d.role}</td>
+    <td style="font-size:.75rem;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(d.texto||'').substring(0,60)}…</td>
+    <td>${d.featured?'⭐':'—'}</td>
+    <td><div class="adm-td-acts">
+      <button class="adm-sm-btn" onclick="editDep(${i})">Editar</button>
+      <button class="adm-sm-btn del" onclick="delDep(${i})">Remover</button>
+    </div></td></tr>`).join('');
 }
 
-const MODALS = {
-  neg: `<h4>Novo Negócio</h4>
-    <div class="fg"><label>Nome</label><input type="text" placeholder="Nome do negócio"></div>
-    <div class="fg-row"><div class="fg"><label>Categoria</label><select>${['Alimentação','Saúde','Estética','Academia','Educação','Tecnologia','Comércio','Serviços','Moda'].map(c=>`<option>${c}</option>`).join('')}</select></div><div class="fg"><label>Contato</label><select><option>WhatsApp</option><option>Site</option></select></div></div>
-    <div class="fg"><label>Endereço</label><input type="text" placeholder="Rua, número - Bairro"></div>
-    <div class="fg"><label>Horário</label><input type="text" placeholder="Seg–Sex 8h–18h"></div>
-    <div class="fg"><label>Descrição</label><textarea rows="3"></textarea></div>
-    <div class="modal-acts"><button class="modal-cancel" onclick="closeModal()">Cancelar</button><button class="modal-save" onclick="saveModal()">Salvar</button></div>`,
-  vag: `<h4>Nova Vaga</h4>
-    <div class="fg"><label>Cargo</label><input type="text"></div>
-    <div class="fg-row"><div class="fg"><label>Empresa</label><input type="text"></div><div class="fg"><label>Tipo</label><select><option>CLT</option><option>PJ</option><option>Estágio</option></select></div></div>
-    <div class="fg-row"><div class="fg"><label>Área</label><input type="text"></div><div class="fg"><label>Salário</label><input type="text"></div></div>
-    <div class="fg"><label>Descrição</label><textarea rows="3"></textarea></div>
-    <div class="modal-acts"><button class="modal-cancel" onclick="closeModal()">Cancelar</button><button class="modal-save" onclick="saveModal()">Salvar</button></div>`,
-  not: `<h4>Nova Notícia</h4>
-    <div class="fg"><label>Título</label><input type="text"></div>
-    <div class="fg-row"><div class="fg"><label>Categoria</label><select><option>Cultura</option><option>Comunidade</option><option>Arte</option></select></div><div class="fg"><label>Leitura</label><input type="text" placeholder="4 min"></div></div>
-    <div class="fg"><label>Resumo</label><textarea rows="3"></textarea></div>
-    <div class="modal-acts"><button class="modal-cancel" onclick="closeModal()">Cancelar</button><button class="modal-save" onclick="saveModal()">Salvar</button></div>`,
-  pod: `<h4>Novo Episódio</h4>
-    <div class="fg-row"><div class="fg"><label>Número</label><input type="text" placeholder="EP 13"></div><div class="fg"><label>Duração</label><input type="text" placeholder="42 min"></div></div>
-    <div class="fg"><label>Título</label><input type="text"></div>
-    <div class="fg"><label>Convidado(a)</label><input type="text"></div>
-    <div class="fg-row"><div class="fg"><label>Link YouTube</label><input type="text" placeholder="https://..."></div><div class="fg"><label>Link Spotify</label><input type="text" placeholder="https://..."></div></div>
-    <div class="modal-acts"><button class="modal-cancel" onclick="closeModal()">Cancelar</button><button class="modal-save" onclick="saveModal()">Salvar</button></div>`,
-};
-function openModal(t) { document.getElementById('modal-box').innerHTML = MODALS[t]; document.getElementById('modal-bg').classList.add('active'); }
+function openModal(tipo, dados, idx) {
+  document.getElementById('modal-box').innerHTML = buildModal(tipo, dados||{}, idx);
+  document.getElementById('modal-bg').classList.add('active');
+}
 function closeModal() { document.getElementById('modal-bg').classList.remove('active'); }
-function saveModal() { closeModal(); alert('Salvo com sucesso! ✅'); }
-document.getElementById('modal-bg').addEventListener('click', e => { if(e.target===document.getElementById('modal-bg')) closeModal(); });
+document.getElementById('modal-bg').addEventListener('click', e => {
+  if (e.target===document.getElementById('modal-bg')) closeModal();
+});
+
+const _CATS_OPT = ['Alimentação','Saúde','Estética','Academia','Eventos','Educação','Tecnologia','Serviços','Drone','Materiais Elétricos','Supermercado','Jóias / Acessórios','Odontologia','Imobiliária','Advocacia'].map(c=>`<option>${c}</option>`).join('');
+function sel(opts, val) { return opts.replace(`>${val}<`,` selected>${val}<`); }
+
+function buildModal(tipo, d, idx) {
+  const tit = idx!=null ? 'Editar' : 'Novo';
+  const acts = `<div class="modal-acts"><button class="modal-cancel" onclick="closeModal()">Cancelar</button><button class="modal-save" onclick="save_${tipo}(${idx})">Salvar</button></div>`;
+
+  if (tipo==='neg') return `<h4>${tit} Negócio</h4>
+    <div class="fg"><label>Nome *</label><input id="m-nome" type="text" value="${d.nome||''}"></div>
+    <div class="fg"><label>Categoria *</label><select id="m-cat">${sel(_CATS_OPT, d.cat||'Alimentação')}</select></div>
+    <div class="fg"><label>Descrição</label><textarea id="m-desc" rows="3">${d.desc||''}</textarea></div>
+    <div class="fg"><label>Endereço</label><input id="m-end" type="text" value="${d.end||''}"></div>
+    <div class="fg"><label>Horário</label><input id="m-hora" type="text" value="${d.hora||''}" placeholder="Seg–Sex 9h–18h"></div>
+    <div class="fg-row"><div class="fg"><label>Contato</label><select id="m-tipo"><option value="wpp"${d.tipo==='wpp'?' selected':''}>WhatsApp</option><option value="site"${d.tipo==='site'?' selected':''}>Site</option></select></div>
+    <div class="fg"><label>Número WPP (só dígitos)</label><input id="m-wpp" type="text" value="${d.wpp||''}" placeholder="5511999999999"></div></div>
+    <div class="fg"><label>URL do Site</label><input id="m-site" type="text" value="${d.siteUrl||''}" placeholder="https://..."></div>
+    <div class="fg"><label>URL da Logo</label><input id="m-logo" type="text" value="${d.logo||''}" placeholder="https://... ou /_assets/v11/..."></div>
+    ${acts}`;
+
+  if (tipo==='vag') return `<h4>${tit} Vaga</h4>
+    <div class="fg"><label>Cargo *</label><input id="m-cargo" type="text" value="${d.cargo||''}"></div>
+    <div class="fg-row"><div class="fg"><label>Empresa *</label><input id="m-emp" type="text" value="${d.empresa||''}"></div>
+    <div class="fg"><label>Tipo</label><select id="m-tipo"><option${d.tipo==='CLT'?' selected':''}>CLT</option><option${d.tipo==='PJ / Autônomo'?' selected':''}>PJ / Autônomo</option><option${d.tipo==='Estágio'?' selected':''}>Estágio</option></select></div></div>
+    <div class="fg-row"><div class="fg"><label>Área</label><input id="m-area" type="text" value="${d.area||''}"></div>
+    <div class="fg"><label>Emoji</label><input id="m-icon" type="text" value="${d.icon||'💼'}" style="max-width:70px"></div></div>
+    <div class="fg-row"><div class="fg"><label>Salário</label><input id="m-sal" type="text" value="${d.sal||''}" placeholder="R$ 2.000–R$ 3.000"></div>
+    <div class="fg"><label>Local</label><input id="m-local" type="text" value="${d.local||''}" placeholder="Limão, SP"></div></div>
+    <div class="fg"><label>Descrição</label><textarea id="m-desc" rows="3">${d.desc||''}</textarea></div>
+    <div class="fg"><label>WhatsApp (só dígitos)</label><input id="m-wpp" type="text" value="${(d.wpp||'').replace(/.*wa\.me\//,'').replace(/\?.*/,'')}" placeholder="5511983592721"></div>
+    ${acts}`;
+
+  if (tipo==='pod') return `<h4>${tit} Episódio</h4>
+    <div class="fg-row"><div class="fg"><label>Número (ex: EP 13)</label><input id="m-ep" type="text" value="${d.ep||''}"></div>
+    <div class="fg"><label>Duração</label><input id="m-dur" type="text" value="${d.dur||''}" placeholder="42 min"></div></div>
+    <div class="fg"><label>Título *</label><input id="m-titulo" type="text" value="${d.titulo||''}"></div>
+    <div class="fg"><label>Convidado(a)</label><input id="m-guest" type="text" value="${d.guest||''}"></div>
+    <div class="fg"><label>Data</label><input id="m-data" type="text" value="${d.data||''}" placeholder="25 fev 2026"></div>
+    <div class="fg-row"><div class="fg"><label>Link YouTube</label><input id="m-yt" type="text" value="${d.ytUrl||''}" placeholder="https://..."></div>
+    <div class="fg"><label>Link Spotify</label><input id="m-sp" type="text" value="${d.spUrl||''}" placeholder="https://..."></div></div>
+    <div class="fg"><label>Destaque?</label><select id="m-dest"><option value="1"${d.destaque?' selected':''}>Sim — ep. principal</option><option value="0"${!d.destaque?' selected':''}>Não</option></select></div>
+    ${acts}`;
+
+  if (tipo==='not') return `<h4>${tit} Notícia</h4>
+    <div class="fg"><label>Título *</label><input id="m-titulo" type="text" value="${d.titulo||''}"></div>
+    <div class="fg-row"><div class="fg"><label>Categoria</label><select id="m-cat"><option${d.cat==='Cultura'?' selected':''}>Cultura</option><option${d.cat==='Comunidade'?' selected':''}>Comunidade</option><option${d.cat==='Arte'?' selected':''}>Arte</option><option${d.cat==='Gastronomia'?' selected':''}>Gastronomia</option><option${d.cat==='Esporte'?' selected':''}>Esporte</option><option${d.cat==='Evento'?' selected':''}>Evento</option></select></div>
+    <div class="fg"><label>Tempo de leitura</label><input id="m-leit" type="text" value="${d.leit||''}" placeholder="4 min"></div></div>
+    <div class="fg"><label>Data</label><input id="m-data" type="text" value="${d.data||''}" placeholder="15 fev 2026"></div>
+    <div class="fg"><label>Resumo</label><textarea id="m-exc" rows="3">${d.excerpt||''}</textarea></div>
+    <div class="fg"><label>Destaque?</label><select id="m-feat"><option value="1"${d.featured?' selected':''}>Sim — card grande</option><option value="0"${!d.featured?' selected':''}>Não</option></select></div>
+    ${acts}`;
+
+  if (tipo==='dep') return `<h4>${tit} Depoimento</h4>
+    <div class="fg"><label>Nome *</label><input id="m-nome" type="text" value="${d.nome||''}"></div>
+    <div class="fg"><label>Perfil</label><input id="m-role" type="text" value="${d.role||''}" placeholder="Moradora há 12 anos"></div>
+    <div class="fg"><label>Depoimento *</label><textarea id="m-texto" rows="4">${(d.texto||'').replace(/^"|"$/g,'')}</textarea></div>
+    <div class="fg"><label>Destaque?</label><select id="m-feat"><option value="1"${d.featured?' selected':''}>Sim — card escuro em evidência</option><option value="0"${!d.featured?' selected':''}>Não</option></select></div>
+    ${acts}`;
+  return '';
+}
+
+function editNeg(i) { openModal('neg', negocios[i], i); }
+function delNeg(i) {
+  if (!confirm(`Remover "${negocios[i].nome}"?`)) return;
+  negocios.splice(i,1); salvarDB(); renderTblNegs(); renderDashStats(); negociosVisiveis=6; renderCards();
+  toast('Negócio removido.');
+}
+function save_neg(idx) {
+  if (!fv('m-nome')) { alert('Nome é obrigatório'); return; }
+  const BASE = 'https://dizzy-hug-77416784.figma.site';
+  const logoRaw = fv('m-logo');
+  const obj = {
+    id: idx!=null ? negocios[idx].id : nextId(negocios),
+    nome: fv('m-nome'), cat: fv('m-cat'), desc: fv('m-desc'),
+    end: fv('m-end'), hora: fv('m-hora'), tipo: fv('m-tipo'),
+    wpp: fv('m-wpp'), siteUrl: fv('m-site'),
+    logo: logoRaw ? (logoRaw.startsWith('http') ? logoRaw : BASE+logoRaw) : '',
+    logoCls: '',
+  };
+  if (idx!=null) negocios[idx]=obj; else negocios.push(obj);
+  salvarDB(); renderTblNegs(); renderDashStats(); negociosVisiveis=6; renderCards();
+  closeModal(); toast('Negócio salvo! ✅');
+}
+
+function editVag(i) { openModal('vag', vagas[i], i); }
+function delVag(i) {
+  if (!confirm(`Remover vaga "${vagas[i].cargo}"?`)) return;
+  vagas.splice(i,1); salvarDB(); renderTblVags(); renderDashStats(); renderVagas();
+  toast('Vaga removida.');
+}
+function save_vag(idx) {
+  if (!fv('m-cargo')) { alert('Cargo é obrigatório'); return; }
+  const wppNum = fv('m-wpp').replace(/\D/g,'');
+  const cargo = fv('m-cargo');
+  const obj = {
+    cargo, empresa: fv('m-emp'), tipo: fv('m-tipo'), area: fv('m-area'),
+    icon: fv('m-icon')||'💼', sal: fv('m-sal'), local: fv('m-local'),
+    desc: fv('m-desc'), tempo: 'Recente',
+    wpp: `https://wa.me/${wppNum}?text=Oi!%20Vi%20a%20vaga%20de%20${encodeURIComponent(cargo)}%20pelo%20Tem%20no%20Lim%C3%A3o%20%F0%9F%8D%8B%20%E2%80%94%20tenho%20interesse!`,
+  };
+  if (idx!=null) vagas[idx]=obj; else vagas.push(obj);
+  salvarDB(); renderTblVags(); renderDashStats(); renderVagas();
+  closeModal(); toast('Vaga salva! ✅');
+}
+
+function editPod(i) { openModal('pod', podcasts[i], i); }
+function delPod(i) {
+  if (!confirm(`Remover "${podcasts[i].titulo}"?`)) return;
+  podcasts.splice(i,1); salvarDB(); renderTblPods(); renderDashStats(); renderPodcast();
+  toast('Episódio removido.');
+}
+function save_pod(idx) {
+  if (!fv('m-titulo')) { alert('Título é obrigatório'); return; }
+  const dest = fv('m-dest')==='1';
+  if (dest) podcasts.forEach(p=>p.destaque=false);
+  const obj = {
+    ep: fv('m-ep'), titulo: fv('m-titulo'), guest: fv('m-guest'),
+    dur: fv('m-dur'), data: fv('m-data'), ytUrl: fv('m-yt'), spUrl: fv('m-sp'), destaque: dest,
+  };
+  if (idx!=null) podcasts[idx]=obj; else podcasts.unshift(obj);
+  salvarDB(); renderTblPods(); renderDashStats(); renderPodcast();
+  closeModal(); toast('Episódio salvo! ✅');
+}
+
+function editNot(i) { openModal('not', noticias[i], i); }
+function delNot(i) {
+  if (!confirm('Remover esta notícia?')) return;
+  noticias.splice(i,1); salvarDB(); renderTblNots(); renderDashStats(); renderNews();
+  toast('Notícia removida.');
+}
+function save_not(idx) {
+  if (!fv('m-titulo')) { alert('Título é obrigatório'); return; }
+  const feat = fv('m-feat')==='1';
+  if (feat) noticias.forEach(n=>n.featured=false);
+  const obj = {
+    titulo: fv('m-titulo'), cat: fv('m-cat'), leit: fv('m-leit'),
+    data: fv('m-data'), excerpt: fv('m-exc'), featured: feat, secondary: !feat,
+  };
+  if (idx!=null) noticias[idx]=obj; else noticias.unshift(obj);
+  salvarDB(); renderTblNots(); renderDashStats(); renderNews();
+  closeModal(); toast('Notícia salva! ✅');
+}
+
+function editDep(i) { openModal('dep', depoimentos[i], i); }
+function delDep(i) {
+  if (!confirm(`Remover depoimento de "${depoimentos[i].nome}"?`)) return;
+  depoimentos.splice(i,1); salvarDB(); renderTblDeps(); renderDashStats(); renderDep();
+  toast('Depoimento removido.');
+}
+function save_dep(idx) {
+  const texto = fv('m-texto');
+  if (!fv('m-nome')||!texto) { alert('Nome e depoimento são obrigatórios'); return; }
+  const feat = fv('m-feat')==='1';
+  if (feat) depoimentos.forEach(d=>d.featured=false);
+  const obj = {
+    nome: fv('m-nome'), role: fv('m-role'),
+    texto: `"${texto.replace(/^"|"$/g,'')}"`, featured: feat,
+  };
+  if (idx!=null) depoimentos[idx]=obj; else depoimentos.push(obj);
+  salvarDB(); renderTblDeps(); renderDashStats(); renderDep();
+  closeModal(); toast('Depoimento salvo! ✅');
+}
+
 
 // ── NAV / HASH ────────────────────────────────────
 function toggleMenu() {
@@ -1604,6 +1956,10 @@ function checkHash() {
 window.addEventListener('hashchange', checkHash);
 
 // ── INIT ──────────────────────────────────────────
+// Carregar dados salvos do localStorage (se existir)
+const _savedDB = carregarDB();
+if (_savedDB) aplicarDB(_savedDB);
+
 renderFilterBar();
 renderCards();
 renderPodcast();
