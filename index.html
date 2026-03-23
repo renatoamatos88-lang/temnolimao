@@ -40,144 +40,254 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
-   ADMIN OVERLAY
+   ADMIN — TEMA ESCURO COMPLETO
 ═══════════════════════════════════════════════════ */
+:root {
+  --adm-bg:      #0d1008;
+  --adm-surface: #161c0e;
+  --adm-card:    #1c2412;
+  --adm-border:  rgba(200,224,74,.12);
+  --adm-text:    rgba(255,255,255,.85);
+  --adm-muted:   rgba(255,255,255,.35);
+  --adm-limao:   #C8E04A;
+  --adm-danger:  #e74c3c;
+  --adm-pause:   #f39c12;
+  --adm-active:  #27ae60;
+}
+
 #admin-overlay {
   display: none; position: fixed; inset: 0; z-index: 9000;
-  background: var(--dark);
-  align-items: center; justify-content: center;
+  background: var(--adm-bg);
 }
 #admin-overlay.active { display: flex; flex-direction: column; }
 
-/* Login box */
+/* ── Login ── */
+.adm-login-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
 .adm-login-box {
-  background: var(--cream); border-radius: 1.25rem;
-  padding: 3rem 2.5rem; width: 360px; max-width: 90vw;
-  text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,.5);
+  background: var(--adm-card); border-radius: 1.25rem;
+  padding: 3rem 2.5rem; width: 380px; max-width: 92vw;
+  text-align: center; border: 1px solid var(--adm-border);
+  box-shadow: 0 40px 80px rgba(0,0,0,.6);
 }
-.adm-login-box .adm-emoji { font-size: 2.8rem; margin-bottom: .5rem; }
+.adm-login-box .adm-emoji { font-size: 3rem; margin-bottom: .75rem; }
 .adm-login-box h2 {
-  font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
-  color: var(--dark); margin-bottom: .25rem;
+  font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900;
+  color: var(--adm-limao); margin-bottom: .3rem;
 }
-.adm-login-box p { font-size: .82rem; color: var(--text-light); margin-bottom: 2rem; }
+.adm-login-box p { font-size: .82rem; color: var(--adm-muted); margin-bottom: 2rem; }
 .adm-login-box input[type="password"] {
-  width: 100%; padding: .85rem 1rem; border: 2px solid var(--cream2);
-  border-radius: 2rem; font-family: monospace; font-size: 1rem;
-  background: white; color: var(--dark); outline: none;
-  text-align: center; letter-spacing: 4px; margin-bottom: .75rem;
-  transition: border-color .2s;
+  width: 100%; padding: .9rem 1.1rem; border: 1.5px solid var(--adm-border);
+  border-radius: .75rem; font-size: 1rem; background: var(--adm-surface);
+  color: var(--adm-text); outline: none; text-align: center;
+  letter-spacing: 4px; margin-bottom: .75rem; transition: border-color .2s;
 }
-.adm-login-box input[type="password"]:focus { border-color: var(--limao-dark); }
+.adm-login-box input:focus { border-color: var(--adm-limao); }
 .adm-login-box .adm-login-btn {
-  width: 100%; padding: .9rem; background: var(--limao); color: var(--dark);
-  border: none; border-radius: 2rem; font-family: 'DM Sans', sans-serif;
-  font-size: .95rem; font-weight: 700; cursor: pointer; transition: background .2s;
+  width: 100%; padding: .95rem; background: var(--adm-limao); color: #0d1008;
+  border: none; border-radius: .75rem; font-family: 'DM Sans', sans-serif;
+  font-size: .95rem; font-weight: 800; cursor: pointer; transition: all .2s;
 }
-.adm-login-box .adm-login-btn:hover { background: var(--limao-dark); }
-.adm-login-err { color: #c0392b; font-size: .78rem; margin-top: .5rem; min-height: 1rem; }
+.adm-login-box .adm-login-btn:hover { background: #b0c82e; transform: translateY(-1px); }
+.adm-login-err { color: #e74c3c; font-size: .78rem; margin-top: .5rem; min-height: 1rem; }
 
-/* Admin panel */
+/* ── Panel layout ── */
 #adm-panel { display: none; width: 100%; height: 100%; flex-direction: column; }
 #adm-panel.active { display: flex; }
+
 .adm-topbar {
-  background: var(--dark); height: 56px; padding: 0 1.5rem;
+  background: var(--adm-surface); height: 56px; padding: 0 1.5rem;
   display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-  border-bottom: 1px solid rgba(200,224,74,.15);
+  border-bottom: 1px solid var(--adm-border);
 }
 .adm-topbar-brand {
   font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 1rem; color: var(--limao); display: flex; align-items: center; gap: .5rem;
+  font-size: 1rem; color: var(--adm-limao); display: flex; align-items: center; gap: .5rem;
 }
 .adm-topbar-actions { display: flex; gap: .5rem; }
 .adm-tbtn {
-  padding: .4rem 1rem; border-radius: 2rem; font-size: .78rem; font-weight: 600;
+  padding: .4rem 1rem; border-radius: .5rem; font-size: .78rem; font-weight: 600;
   cursor: pointer; transition: all .15s; font-family: 'DM Sans', sans-serif;
-  background: transparent; border: 1px solid rgba(255,255,255,.2); color: white;
+  background: transparent; border: 1px solid var(--adm-border); color: var(--adm-text);
 }
-.adm-tbtn:hover { background: rgba(255,255,255,.1); }
+.adm-tbtn:hover { background: rgba(200,224,74,.1); border-color: var(--adm-limao); color: var(--adm-limao); }
+
 .adm-body { display: flex; flex: 1; overflow: hidden; }
+
+/* ── Sidebar ── */
 .adm-sidebar {
-  width: 200px; background: #0c0f07;
-  border-right: 1px solid rgba(255,255,255,.06);
+  width: 220px; background: var(--adm-surface);
+  border-right: 1px solid var(--adm-border);
   padding: 1.25rem 0; flex-shrink: 0; overflow-y: auto;
+  display: flex; flex-direction: column;
 }
+.adm-sidebar-logo {
+  padding: 0 1.25rem 1.5rem; border-bottom: 1px solid var(--adm-border); margin-bottom: .75rem;
+}
+.adm-sidebar-logo .name { font-family: 'Playfair Display', serif; font-style:italic; color: var(--adm-limao); font-size: 1rem; font-weight:700; }
+.adm-sidebar-logo .sub { font-size: .65rem; color: var(--adm-muted); letter-spacing: .12em; text-transform: uppercase; font-family: 'Space Mono',monospace; }
 .adm-nav-lbl {
   font-family: 'Space Mono', monospace; font-size: .58rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .15em; color: rgba(255,255,255,.2);
-  padding: 1.25rem 1.25rem .4rem;
+  text-transform: uppercase; letter-spacing: .15em; color: var(--adm-muted);
+  padding: 1rem 1.25rem .4rem;
 }
 .adm-nav-link {
   display: flex; align-items: center; gap: .6rem;
-  padding: .65rem 1.25rem; font-size: .82rem; color: rgba(255,255,255,.45);
+  padding: .6rem 1.25rem; font-size: .82rem; color: var(--adm-muted);
   text-decoration: none; transition: all .15s; cursor: pointer; font-weight: 500;
-  border: none; background: none; width: 100%; text-align: left;
+  border: none; background: none; width: 100%; text-align: left; border-radius: 0;
 }
-.adm-nav-link:hover, .adm-nav-link.active {
-  color: var(--limao); background: rgba(200,224,74,.07);
+.adm-nav-link:hover { color: var(--adm-limao); background: rgba(200,224,74,.06); }
+.adm-nav-link.active { color: var(--adm-limao); background: rgba(200,224,74,.1); border-left: 2px solid var(--adm-limao); }
+.adm-sidebar-bottom { margin-top: auto; padding: 1rem 1.25rem; border-top: 1px solid var(--adm-border); }
+.adm-back-btn {
+  display: flex; align-items: center; gap: .5rem; width: 100%; padding: .6rem .875rem;
+  background: rgba(200,224,74,.08); border: 1px solid var(--adm-border); border-radius: .5rem;
+  color: var(--adm-limao); font-size: .78rem; font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans',sans-serif; transition: all .15s; margin-bottom: .5rem;
 }
-.adm-content { flex: 1; overflow-y: auto; padding: 2rem 2.5rem; background: var(--cream); }
+.adm-back-btn:hover { background: rgba(200,224,74,.18); }
+.adm-logout-btn {
+  display: flex; align-items: center; gap: .5rem; width: 100%; padding: .5rem .875rem;
+  background: transparent; border: none; color: var(--adm-muted);
+  font-size: .75rem; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: all .15s;
+}
+.adm-logout-btn:hover { color: #e74c3c; }
+
+/* ── Content ── */
+.adm-content { flex: 1; overflow-y: auto; padding: 2rem 2.5rem; background: var(--adm-bg); }
 .adm-sec { display: none; }
 .adm-sec.active { display: block; }
 .adm-sec-title {
-  font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900;
-  color: var(--dark); margin-bottom: .25rem;
+  font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 900;
+  color: white; margin-bottom: .3rem;
 }
-.adm-sec-sub { font-size: .8rem; color: var(--text-light); margin-bottom: 1.5rem; }
-.adm-stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: .875rem; margin-bottom: 1.75rem; }
-.adm-stat-box { background: white; border-radius: .875rem; padding: 1.1rem 1rem; text-align: center; border: 1px solid var(--cream2); }
-.adm-stat-box .n { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: .25rem; }
-.adm-stat-box .l { font-family: 'Space Mono', monospace; font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-light); }
-.adm-table-card { background: white; border-radius: .875rem; border: 1px solid var(--cream2); overflow: hidden; margin-bottom: 1.25rem; }
-.adm-table-head { padding: .875rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--cream2); }
-.adm-table-head span { font-weight: 700; font-size: .85rem; color: var(--dark); }
+.adm-sec-sub { font-size: .82rem; color: var(--adm-muted); margin-bottom: 1.75rem; }
+
+/* Dashboard stat cards */
+.adm-stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.adm-stat-card {
+  background: var(--adm-card); border: 1px solid var(--adm-border);
+  border-radius: 1rem; padding: 1.25rem 1rem; cursor: pointer; transition: all .18s;
+}
+.adm-stat-card:hover { border-color: var(--adm-limao); transform: translateY(-2px); }
+.adm-stat-card .icon { font-size: 1.5rem; margin-bottom: .5rem; }
+.adm-stat-card .num { font-family: 'Playfair Display',serif; font-size: 2rem; font-weight:900; color: var(--adm-limao); line-height:1; }
+.adm-stat-card .lbl { font-size: .72rem; color: var(--adm-muted); margin-top: .25rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.adm-stat-card .sub-lbl { font-size: .68rem; color: var(--adm-muted); margin-top: .2rem; opacity:.7; }
+
+/* Tips card */
+.adm-tips {
+  background: var(--adm-card); border: 1px solid var(--adm-border); border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+.adm-tips h4 { color: var(--adm-limao); font-size: .88rem; margin-bottom: .75rem; }
+.adm-tips li { color: var(--adm-muted); font-size: .8rem; margin-bottom: .35rem; line-height: 1.5; }
+.adm-tips strong { color: white; }
+.adm-tips code { background: rgba(200,224,74,.12); color: var(--adm-limao); padding: .1rem .4rem; border-radius: .3rem; font-size: .75rem; }
+
+/* Table cards */
+.adm-table-card {
+  background: var(--adm-card); border-radius: 1rem; border: 1px solid var(--adm-border);
+  overflow: hidden; margin-bottom: 1.25rem;
+}
+.adm-table-head {
+  padding: .875rem 1.25rem; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--adm-border);
+}
+.adm-table-head span { font-weight: 700; font-size: .85rem; color: white; }
 .adm-add-btn {
-  background: var(--limao); color: var(--dark); border: none;
-  padding: .45rem 1rem; border-radius: 2rem; font-size: .75rem; font-weight: 700;
-  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+  background: var(--adm-limao); color: #0d1008; border: none;
+  padding: .45rem 1rem; border-radius: .5rem; font-size: .75rem; font-weight: 800;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s;
 }
-.adm-add-btn:hover { background: var(--limao-dark); }
+.adm-add-btn:hover { background: #b0c82e; transform: translateY(-1px); }
 table { width: 100%; border-collapse: collapse; }
 th {
-  text-align: left; font-family: 'Space Mono', monospace; font-size: .62rem;
+  text-align: left; font-family: 'Space Mono', monospace; font-size: .6rem;
   font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--text-light); padding: .6rem 1.25rem; background: #faf9f4;
-  border-bottom: 1px solid var(--cream2);
+  color: var(--adm-muted); padding: .65rem 1.25rem; background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--adm-border);
 }
-td { padding: .75rem 1.25rem; font-size: .82rem; border-bottom: 1px solid var(--cream2); vertical-align: middle; }
+td { padding: .75rem 1.25rem; font-size: .82rem; border-bottom: 1px solid var(--adm-border); vertical-align: middle; color: var(--adm-text); }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: #faf9f0; }
-.adm-badge { display: inline-block; padding: .15rem .6rem; border-radius: 2rem; font-family: 'Space Mono', monospace; font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.adm-badge-g { background: #e6f4ea; color: #1e7e34; }
-.adm-badge-b { background: #e8f0fe; color: #1a56c4; }
-.adm-badge-o { background: #fef3e8; color: #c45c0a; }
-.adm-td-acts { display: flex; gap: .4rem; }
+tr:hover td { background: rgba(255,255,255,.02); }
+
+/* Badges */
+.adm-badge { display: inline-flex; align-items:center; gap:.3rem; padding: .2rem .6rem; border-radius: 2rem; font-family: 'Space Mono', monospace; font-size: .6rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.badge-active  { background: rgba(39,174,96,.15);  color: #2ecc71; border: 1px solid rgba(39,174,96,.3); }
+.badge-paused  { background: rgba(243,156,18,.15);  color: #f39c12; border: 1px solid rgba(243,156,18,.3); }
+.badge-cat     { background: rgba(200,224,74,.12);  color: var(--adm-limao); border: 1px solid var(--adm-border); }
+.badge-clt     { background: rgba(52,152,219,.15);  color: #3498db; border: 1px solid rgba(52,152,219,.3); }
+.badge-pj      { background: rgba(155,89,182,.15);  color: #9b59b6; border: 1px solid rgba(155,89,182,.3); }
+.badge-feat    { background: rgba(200,224,74,.15);  color: var(--adm-limao); border: 1px solid var(--adm-border); }
+
+/* Action buttons */
+.adm-td-acts { display: flex; gap: .35rem; flex-wrap: wrap; }
 .adm-sm-btn {
-  padding: .3rem .7rem; border-radius: .4rem; font-size: .7rem; cursor: pointer;
-  border: 1px solid var(--cream2); background: white; transition: all .15s;
-  font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--dark);
+  padding: .28rem .65rem; border-radius: .4rem; font-size: .7rem; cursor: pointer;
+  border: 1px solid var(--adm-border); background: rgba(255,255,255,.05);
+  transition: all .15s; font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--adm-text);
 }
-.adm-sm-btn:hover { background: var(--dark); color: var(--limao); border-color: var(--dark); }
-.adm-sm-btn.del:hover { background: #c0392b; color: white; border-color: #c0392b; }
+.adm-sm-btn:hover { background: rgba(200,224,74,.15); color: var(--adm-limao); border-color: var(--adm-limao); }
+.adm-sm-btn.pause { color: var(--adm-pause); }
+.adm-sm-btn.pause:hover { background: rgba(243,156,18,.15); border-color: var(--adm-pause); }
+.adm-sm-btn.unpause { color: var(--adm-active); }
+.adm-sm-btn.unpause:hover { background: rgba(39,174,96,.15); border-color: var(--adm-active); }
+.adm-sm-btn.del:hover { background: rgba(231,76,60,.15); color: #e74c3c; border-color: #e74c3c; }
+
+/* Search */
+.adm-search {
+  width: 100%; padding: .65rem 1rem; border: 1px solid var(--adm-border);
+  border-radius: .65rem; background: var(--adm-card); color: var(--adm-text);
+  font-size: .85rem; font-family: 'DM Sans',sans-serif; outline: none;
+  margin-bottom: 1rem; transition: border-color .2s;
+}
+.adm-search:focus { border-color: var(--adm-limao); }
+.adm-search::placeholder { color: var(--adm-muted); }
+
+/* Config form */
+.fg { margin-bottom: .875rem; }
+.fg label { display: block; font-family: 'Space Mono', monospace; font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--adm-muted); margin-bottom: .35rem; }
+.fg input, .fg select, .fg textarea {
+  width: 100%; padding: .65rem .875rem; border: 1px solid var(--adm-border);
+  border-radius: .6rem; font-size: .875rem; font-family: 'DM Sans', sans-serif;
+  background: var(--adm-surface); color: var(--adm-text); outline: none;
+  transition: border-color .2s; resize: vertical;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--adm-limao); }
+.fg select option { background: var(--adm-surface); }
+.fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+
+.adm-cfg-card {
+  background: var(--adm-card); border: 1px solid var(--adm-border);
+  border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.25rem;
+}
+.adm-cfg-card h4 { color: white; font-size: .88rem; font-weight: 700; margin-bottom: 1.1rem; display:flex; align-items:center; gap:.5rem; }
 
 /* Modal */
-.modal-bg { display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,.5); align-items: center; justify-content: center; }
+.modal-bg { display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,.7); align-items: center; justify-content: center; backdrop-filter: blur(4px); }
 .modal-bg.active { display: flex; }
-.modal-box { background: white; border-radius: 1.1rem; padding: 2rem; width: 440px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 80px rgba(0,0,0,.3); }
-.modal-box h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 1.25rem; }
-.fg { margin-bottom: .875rem; }
-.fg label { display: block; font-family: 'Space Mono', monospace; font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-light); margin-bottom: .35rem; }
-.fg input, .fg select, .fg textarea {
-  width: 100%; padding: .65rem .875rem; border: 1.5px solid var(--cream2);
-  border-radius: .6rem; font-size: .875rem; font-family: 'DM Sans', sans-serif;
-  background: var(--cream); color: var(--dark); outline: none; transition: border-color .2s; resize: vertical;
-}
-.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--limao-dark); background: white; }
-.fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.modal-box { background: var(--adm-card); border: 1px solid var(--adm-border); border-radius: 1.1rem; padding: 2rem; width: 480px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 80px rgba(0,0,0,.6); }
+.modal-box h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 900; color: white; margin-bottom: 1.25rem; }
 .modal-acts { display: flex; gap: .5rem; margin-top: 1.5rem; justify-content: flex-end; }
-.modal-cancel { padding: .6rem 1.25rem; border: 1px solid var(--cream2); border-radius: 2rem; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: .82rem; color: var(--text-light); }
-.modal-save { padding: .6rem 1.5rem; background: var(--limao); color: var(--dark); border: none; border-radius: 2rem; font-family: 'DM Sans', sans-serif; font-size: .82rem; font-weight: 700; cursor: pointer; transition: background .2s; }
-.modal-save:hover { background: var(--limao-dark); }
+.modal-cancel { padding: .6rem 1.25rem; border: 1px solid var(--adm-border); border-radius: .5rem; background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: .82rem; color: var(--adm-muted); transition: all .15s; }
+.modal-cancel:hover { border-color: var(--adm-muted); color: white; }
+.modal-save { padding: .6rem 1.5rem; background: var(--adm-limao); color: #0d1008; border: none; border-radius: .5rem; font-family: 'DM Sans', sans-serif; font-size: .82rem; font-weight: 800; cursor: pointer; transition: all .2s; }
+.modal-save:hover { background: #b0c82e; transform: translateY(-1px); }
+
+/* Logo preview */
+.logo-preview-wrap { position:relative; display:inline-block; margin-top:.5rem; }
+.logo-preview { width:80px; height:80px; object-fit:contain; border-radius:.5rem; border:1px solid var(--adm-border); background: var(--adm-surface); display:none; }
+.logo-preview.visible { display:block; }
+
+/* Instagram reels grid */
+.adm-ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:1rem; margin-top:1rem; }
+.adm-ig-reel { background: var(--adm-card); border: 1px solid var(--adm-border); border-radius:.75rem; overflow:hidden; }
+.adm-ig-reel-url { font-size:.7rem; color:var(--adm-muted); padding:.5rem .75rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-top: 1px solid var(--adm-border); }
+.adm-ig-reel-actions { display:flex; gap:.35rem; padding:.5rem .75rem; }
 
 
 /* ═══════════════════════════════════════════════════
@@ -799,101 +909,177 @@ tr:hover td { background: #faf9f0; }
 
 <!-- ═══════════ ADMIN OVERLAY ═══════════ -->
 <div id="admin-overlay">
-  <div class="adm-login-box" id="adm-login-box">
-    <div class="adm-emoji">🍋</div>
-    <h2>Área Administrativa</h2>
-    <p>Tem no Limão — Painel de Gestão</p>
-    <input type="password" id="adm-pwd" placeholder="••••••••" autocomplete="current-password">
-    <button class="adm-login-btn" onclick="admLogin()">👁️ Entrar</button>
-    <div class="adm-login-err" id="adm-err"></div>
+  <!-- Login -->
+  <div class="adm-login-wrap" id="adm-login-box">
+    <div class="adm-login-box">
+      <div class="adm-emoji">🍋</div>
+      <h2>Tem no Limão</h2>
+      <p>Painel Administrativo</p>
+      <input type="password" id="adm-pwd" placeholder="••••••••" autocomplete="current-password">
+      <button class="adm-login-btn" onclick="admLogin()">Entrar</button>
+      <div class="adm-login-err" id="adm-err"></div>
+    </div>
   </div>
 
+  <!-- Panel -->
   <div id="adm-panel">
     <div class="adm-topbar">
       <div class="adm-topbar-brand">🍋 Painel ADM — Tem no Limão</div>
-      <div class="adm-topbar-actions">
-        <button class="adm-tbtn" onclick="admBack()">← Voltar ao site</button>
-        <button class="adm-tbtn" onclick="admLogout()">Sair</button>
-      </div>
     </div>
     <div class="adm-body">
+      <!-- Sidebar -->
       <div class="adm-sidebar">
+        <div class="adm-sidebar-logo">
+          <div class="name">Tem no Limão</div>
+          <div class="sub">Painel ADM</div>
+        </div>
         <div class="adm-nav-lbl">Geral</div>
-        <button class="adm-nav-link active" data-sec="dash" onclick="admNav(this,'dash')">📊 Dashboard</button>
+        <button class="adm-nav-link active" data-sec="dash" onclick="admNav(this,'dash')">📊 Visão Geral</button>
         <div class="adm-nav-lbl">Conteúdo</div>
         <button class="adm-nav-link" data-sec="negs" onclick="admNav(this,'negs')">🏪 Negócios</button>
         <button class="adm-nav-link" data-sec="vags" onclick="admNav(this,'vags')">💼 Vagas</button>
         <button class="adm-nav-link" data-sec="pods" onclick="admNav(this,'pods')">🎙️ Podcast</button>
         <button class="adm-nav-link" data-sec="nots" onclick="admNav(this,'nots')">📰 Notícias</button>
         <button class="adm-nav-link" data-sec="deps" onclick="admNav(this,'deps')">💬 Depoimentos</button>
+        <button class="adm-nav-link" data-sec="ig" onclick="admNav(this,'ig')">📸 Instagram</button>
         <div class="adm-nav-lbl">Config</div>
         <button class="adm-nav-link" data-sec="cfg" onclick="admNav(this,'cfg')">⚙️ Configurações</button>
+        <div class="adm-sidebar-bottom">
+          <button class="adm-back-btn" onclick="admBack()">← Voltar ao site</button>
+          <button class="adm-logout-btn" onclick="admLogout()">🔒 Sair</button>
+        </div>
       </div>
+
+      <!-- Content -->
       <div class="adm-content">
-        <!-- DASH -->
+
+        <!-- DASHBOARD -->
         <div class="adm-sec active" id="adm-dash">
-          <div class="adm-sec-title">Dashboard</div>
-          <div class="adm-sec-sub">Visão geral e acesso rápido</div>
+          <div class="adm-sec-title">Bem-vindo ao Painel 🍋</div>
+          <div class="adm-sec-sub">Gerencie todo o conteúdo do <strong style="color:var(--adm-limao)">Tem no Limão</strong> por aqui. Os dados são salvos automaticamente no navegador.</div>
           <div class="adm-stats-row" id="dash-stats"></div>
-          <div style="background:white;border-radius:.875rem;border:1px solid var(--cream2);padding:1.5rem;margin-top:1rem">
-            <div style="font-weight:700;font-size:.9rem;color:var(--dark);margin-bottom:1rem">⚡ Ações rápidas</div>
-            <div style="display:flex;flex-wrap:wrap;gap:.6rem">
-              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=negs]'),'negs');newNeg()">+ Negócio</button>
-              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=vags]'),'vags');newVag()">+ Vaga</button>
-              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=pods]'),'pods');newPod()">+ Podcast</button>
-              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=nots]'),'nots');newNot()">+ Notícia</button>
-              <button class="adm-add-btn" onclick="admNav(document.querySelector('[data-sec=deps]'),'deps');newDep()">+ Depoimento</button>
-            </div>
+          <div class="adm-tips">
+            <h4>📌 Dicas de uso</h4>
+            <ul>
+              <li>Use <strong>Pausar</strong> para esconder temporariamente um item sem excluí-lo.</li>
+              <li>Clique em <strong>Editar</strong> para atualizar qualquer informação.</li>
+              <li>Os dados ficam salvos no <code>localStorage</code> do navegador.</li>
+              <li>Use o botão <code>← Voltar ao site</code> para ver o resultado.</li>
+            </ul>
           </div>
         </div>
 
         <!-- NEGÓCIOS -->
         <div class="adm-sec" id="adm-negs">
-          <div class="adm-sec-title">Negócios</div>
-          <div class="adm-sec-sub">Gerencie o diretório de negócios do bairro</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <div class="adm-sec-title">Negócios <span id="cnt-negs" style="font-size:1rem;color:var(--adm-muted)"></span></div>
+              <div class="adm-sec-sub" style="margin-bottom:0">Diretório de negócios do bairro</div>
+            </div>
+            <button class="adm-add-btn" onclick="openModal('neg')">+ Novo Negócio</button>
+          </div>
+          <input class="adm-search" id="srch-negs" placeholder="Buscar por nome ou categoria..." oninput="renderTblNegs()">
           <div class="adm-table-card">
-            <div class="adm-table-head"><span id="cnt-negs"></span><button class="adm-add-btn" onclick="newNeg()">+ Novo negócio</button></div>
-            <table><thead><tr><th>Nome</th><th>Categoria</th><th>Endereço</th><th>Contato</th><th>Ações</th></tr></thead><tbody id="tbl-negs"></tbody></table>
+            <table>
+              <thead><tr><th>Nome</th><th>Categoria</th><th>Telefone</th><th>Endereço</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody id="tbl-negs"></tbody>
+            </table>
           </div>
         </div>
 
         <!-- VAGAS -->
         <div class="adm-sec" id="adm-vags">
-          <div class="adm-sec-title">Vagas de Emprego</div>
-          <div class="adm-sec-sub">Gerencie oportunidades publicadas</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <div class="adm-sec-title">Vagas <span id="cnt-vags" style="font-size:1rem;color:var(--adm-muted)"></span></div>
+              <div class="adm-sec-sub" style="margin-bottom:0">Oportunidades de emprego no bairro</div>
+            </div>
+            <button class="adm-add-btn" onclick="openModal('vag')">+ Nova Vaga</button>
+          </div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span id="cnt-vags"></span><button class="adm-add-btn" onclick="newVag()">+ Nova vaga</button></div>
-            <table><thead><tr><th>Cargo</th><th>Empresa</th><th>Tipo</th><th>Salário</th><th>Ações</th></tr></thead><tbody id="tbl-vags"></tbody></table>
+            <table>
+              <thead><tr><th>Cargo</th><th>Empresa</th><th>Tipo</th><th>Salário</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody id="tbl-vags"></tbody>
+            </table>
           </div>
         </div>
 
         <!-- PODCAST -->
         <div class="adm-sec" id="adm-pods">
-          <div class="adm-sec-title">Podcast</div>
-          <div class="adm-sec-sub">Gerencie episódios do Podcast do Limão</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <div class="adm-sec-title">Podcast <span id="cnt-pods" style="font-size:1rem;color:var(--adm-muted)"></span></div>
+              <div class="adm-sec-sub" style="margin-bottom:0">Episódios do Podcast do Limão</div>
+            </div>
+            <button class="adm-add-btn" onclick="openModal('pod')">+ Novo Episódio</button>
+          </div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span id="cnt-pods"></span><button class="adm-add-btn" onclick="newPod()">+ Novo episódio</button></div>
-            <table><thead><tr><th>Ep</th><th>Título</th><th>Convidado(a)</th><th>Duração</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-pods"></tbody></table>
+            <table>
+              <thead><tr><th>Ep</th><th>Título</th><th>Convidado(a)</th><th>Duração</th><th>Links</th><th>Destaque</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody id="tbl-pods"></tbody>
+            </table>
           </div>
         </div>
 
         <!-- NOTÍCIAS -->
         <div class="adm-sec" id="adm-nots">
-          <div class="adm-sec-title">Notícias</div>
-          <div class="adm-sec-sub">Gerencie publicações e jornalismo local</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <div class="adm-sec-title">Notícias <span id="cnt-nots" style="font-size:1rem;color:var(--adm-muted)"></span></div>
+              <div class="adm-sec-sub" style="margin-bottom:0">Publicações e jornalismo local</div>
+            </div>
+            <button class="adm-add-btn" onclick="openModal('not')">+ Nova Notícia</button>
+          </div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span id="cnt-nots"></span><button class="adm-add-btn" onclick="newNot()">+ Nova notícia</button></div>
-            <table><thead><tr><th>Título</th><th>Categoria</th><th>Data</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-nots"></tbody></table>
+            <table>
+              <thead><tr><th>Título</th><th>Categoria</th><th>Data</th><th>Destaque</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody id="tbl-nots"></tbody>
+            </table>
           </div>
         </div>
 
         <!-- DEPOIMENTOS -->
         <div class="adm-sec" id="adm-deps">
-          <div class="adm-sec-title">Depoimentos</div>
-          <div class="adm-sec-sub">Avaliações de moradores e empreendedores</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <div class="adm-sec-title">Depoimentos <span id="cnt-deps" style="font-size:1rem;color:var(--adm-muted)"></span></div>
+              <div class="adm-sec-sub" style="margin-bottom:0">Avaliações de moradores e empreendedores</div>
+            </div>
+            <button class="adm-add-btn" onclick="openModal('dep')">+ Novo Depoimento</button>
+          </div>
           <div class="adm-table-card">
-            <div class="adm-table-head"><span id="cnt-deps"></span><button class="adm-add-btn" onclick="newDep()">+ Novo depoimento</button></div>
-            <table><thead><tr><th>Pessoa</th><th>Perfil</th><th>Depoimento</th><th>Destaque</th><th>Ações</th></tr></thead><tbody id="tbl-deps"></tbody></table>
+            <table>
+              <thead><tr><th>Pessoa</th><th>Perfil</th><th>Depoimento</th><th>Destaque</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody id="tbl-deps"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- INSTAGRAM -->
+        <div class="adm-sec" id="adm-ig">
+          <div class="adm-sec-title">Instagram</div>
+          <div class="adm-sec-sub">Gerencie os reels exibidos na seção do Instagram no site</div>
+
+          <div class="adm-cfg-card" style="margin-bottom:1.25rem">
+            <h4>🔗 Conta do Instagram</h4>
+            <div class="fg-row">
+              <div class="fg">
+                <label>URL do perfil</label>
+                <input id="ig-url" type="text" placeholder="https://www.instagram.com/temnolimao/" value="https://www.instagram.com/temnolimao/">
+              </div>
+              <div class="fg">
+                <label>@usuário (exibição)</label>
+                <input id="ig-handle" type="text" placeholder="@temnolimao" value="@temnolimao">
+              </div>
+            </div>
+            <button class="modal-save" onclick="salvarConfigIG()" style="margin-top:.5rem">💾 Salvar conta</button>
+          </div>
+
+          <div class="adm-cfg-card">
+            <h4>🎬 Reels exibidos no site <span id="cnt-ig" style="font-size:.8rem;font-weight:400;color:var(--adm-muted)"></span></h4>
+            <p style="font-size:.78rem;color:var(--adm-muted);margin-bottom:1rem">Cole a URL de cada reel do Instagram (ex: <code style="background:rgba(200,224,74,.1);color:var(--adm-limao);padding:.1rem .4rem;border-radius:.3rem">https://www.instagram.com/reel/ABC123/</code>)</p>
+            <div id="ig-reels-list"></div>
+            <button class="adm-add-btn" onclick="addReel()" style="margin-top:.75rem">+ Adicionar Reel</button>
           </div>
         </div>
 
@@ -901,38 +1087,48 @@ tr:hover td { background: #faf9f0; }
         <div class="adm-sec" id="adm-cfg">
           <div class="adm-sec-title">Configurações</div>
           <div class="adm-sec-sub">Dados gerais, redes sociais e segurança da plataforma</div>
-          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem">
-            <div style="font-weight:700;font-size:.88rem;margin-bottom:1rem;color:var(--dark)">📱 Contato & Redes Sociais</div>
+
+          <div class="adm-cfg-card">
+            <h4>📱 Contato &amp; Redes Sociais</h4>
             <div class="fg-row">
-              <div class="fg"><label>WhatsApp principal (só números)</label><input type="text" id="cfg-wpp" placeholder="+55 11 98359-2721"></div>
+              <div class="fg"><label>WhatsApp principal (só números)</label><input type="text" id="cfg-wpp" placeholder="5511983592721"></div>
               <div class="fg"><label>E-mail</label><input type="text" id="cfg-email" placeholder="oi@temnolimao.com.br"></div>
             </div>
             <div class="fg-row">
-              <div class="fg"><label>Instagram (@usuario)</label><input type="text" id="cfg-instagram" placeholder="@temnolimao"></div>
-              <div class="fg"><label>TikTok (@usuario)</label><input type="text" id="cfg-tiktok" placeholder="@temnolimao"></div>
+              <div class="fg"><label>Instagram (URL completa)</label><input type="text" id="cfg-ig" placeholder="https://www.instagram.com/temnolimao/"></div>
+              <div class="fg"><label>TikTok (URL completa)</label><input type="text" id="cfg-tt" placeholder="https://www.tiktok.com/@temnolimao"></div>
             </div>
-            <div class="fg"><label>YouTube (@usuario)</label><input type="text" id="cfg-youtube" placeholder="@temnolimao110"></div>
-            <div class="fg"><label>Descrição do site</label><textarea id="cfg-desc" rows="2">O guia definitivo dos negócios, serviços e acontecimentos do bairro do Limão, São Paulo.</textarea></div>
+            <div class="fg"><label>YouTube (URL completa)</label><input type="text" id="cfg-yt" placeholder="https://www.youtube.com/@temnolimao110"></div>
           </div>
-          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem">
-            <div style="font-weight:700;font-size:.88rem;margin-bottom:1rem;color:var(--dark)">🔐 Segurança</div>
-            <div class="fg"><label>Nova senha do painel admin</label><input type="password" id="cfg-senha" placeholder="Deixe em branco para manter a atual"></div>
-            <p style="font-size:.75rem;color:#999;margin-top:.25rem">Senha atual: <code style="background:#f0f0f0;padding:.1rem .4rem;border-radius:.3rem">limao2024</code></p>
+
+          <div class="adm-cfg-card">
+            <h4>🦸 Hero — Textos principais</h4>
+            <div class="fg"><label>Título linha 1</label><input type="text" id="cfg-h1" placeholder="Tem no Limão?"></div>
+            <div class="fg"><label>Título linha 2</label><input type="text" id="cfg-h2" placeholder="Tudo e muito mais."></div>
+            <div class="fg"><label>Subtítulo</label><textarea rows="2" id="cfg-sub"></textarea></div>
           </div>
-          <div class="adm-table-card" style="padding:1.75rem;margin-bottom:1.25rem;border-left:3px solid #e74c3c">
-            <div style="font-weight:700;font-size:.88rem;margin-bottom:.5rem;color:#c0392b">⚠️ Zona de perigo</div>
-            <p style="font-size:.82rem;color:#888;margin-bottom:1rem">Apaga todas as alterações feitas no admin e restaura os dados originais do site.</p>
-            <button onclick="resetData()" style="padding:.6rem 1.5rem;background:#e74c3c;color:white;border:none;border-radius:2rem;font-weight:700;font-size:.82rem;cursor:pointer">🗑️ Restaurar dados originais</button>
+
+          <div class="adm-cfg-card">
+            <h4>🔐 Segurança</h4>
+            <div class="fg"><label>Nova senha do painel</label><input type="password" id="cfg-senha" placeholder="Deixe em branco para manter a atual"></div>
+            <div class="fg"><label>Confirmar nova senha</label><input type="password" id="cfg-senha2" placeholder=""></div>
           </div>
-          <div style="margin-top:1.25rem">
+
+          <div class="adm-cfg-card" style="border-color:#e74c3c40">
+            <h4 style="color:#e74c3c">⚠️ Zona de perigo</h4>
+            <p style="font-size:.82rem;color:var(--adm-muted);margin-bottom:1rem">Apaga todas as alterações e restaura os dados originais do site.</p>
+            <button onclick="resetarTudo()" style="padding:.6rem 1.5rem;background:#e74c3c;color:white;border:none;border-radius:.5rem;font-weight:700;font-size:.82rem;cursor:pointer">🗑️ Restaurar dados originais</button>
+          </div>
+
+          <div style="margin-top:1.5rem">
             <button class="modal-save" onclick="salvarConfig()">💾 Salvar configurações</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+      </div><!-- /adm-content -->
+    </div><!-- /adm-body -->
+  </div><!-- /adm-panel -->
+</div><!-- /admin-overlay -->
 <div class="modal-bg" id="modal-bg"><div class="modal-box" id="modal-box"></div></div>
 
 <!-- ═══════════ MAIN SITE ═══════════ -->
@@ -1361,7 +1557,7 @@ function carregarMais() {
 
 function renderCards() {
   const q = (document.getElementById('busca').value||'').toLowerCase();
-  let lista = catAtiva === 'Todos' ? negocios : negocios.filter(n => n.cat === catAtiva);
+  let lista = (catAtiva === 'Todos' ? negocios : negocios.filter(n => n.cat === catAtiva)).filter(n => !n.paused);
   if (q) lista = lista.filter(n => n.nome.toLowerCase().includes(q) || n.cat.toLowerCase().includes(q) || n.desc.toLowerCase().includes(q));
   const visivel = lista.slice(0, negociosVisiveis);
   const temMais = lista.length > negociosVisiveis;
@@ -1406,7 +1602,8 @@ function renderCards() {
 }
 
 function renderPodcast() {
-  const [feat, ...rest] = podcasts;
+  const activePods = podcasts.filter(p=>!p.paused);
+  const [feat, ...rest] = activePods.length ? activePods : podcasts;
   const podImgBase = 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80&fit=crop';
   const restImgs = [
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=150&q=60',
@@ -1498,7 +1695,7 @@ function renderDep() {
     'https://i.pravatar.cc/80?img=4',
     'https://i.pravatar.cc/80?img=5',
   ];
-  document.getElementById('dep-grid').innerHTML = depoimentos.map((d,i) => `
+  document.getElementById('dep-grid').innerHTML = depoimentos.filter(d=>!d.paused).map((d,i) => `
     <div class="tnl-dep-card${d.featured?' featured':''}">
       <div class="tnl-dep-stars">★★★★★</div>
       <div class="tnl-dep-text">${d.texto}</div>
@@ -1510,7 +1707,7 @@ function renderDep() {
 }
 
 function renderVagas() {
-  document.getElementById('vagas-grid').innerHTML = vagas.map(v => `
+  document.getElementById('vagas-grid').innerHTML = vagas.filter(v=>!v.paused).map(v => `
     <div class="tnl-vaga-card">
       <div class="tnl-vaga-top">
         <span class="tnl-vaga-emoji">${v.icon}</span>
@@ -1543,11 +1740,12 @@ const DB_KEY    = 'tnl_db';
 const SENHA     = 'limao2024';
 function getSenha() { return localStorage.getItem(SENHA_KEY) || SENHA; }
 
+// ── DB ────────────────────────────────────────────
 function carregarDB() {
   try { const r = localStorage.getItem(DB_KEY); return r ? JSON.parse(r) : null; } catch(e) { return null; }
 }
 function salvarDB() {
-  const db = { negocios, vagas, podcasts, noticias, depoimentos, config: lerConfig() };
+  const db = { negocios, vagas, podcasts, noticias, depoimentos, reels: getReelsCfg(), igCfg: getIGCfg(), config: lerConfig() };
   try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch(e) {}
 }
 function aplicarDB(db) {
@@ -1557,9 +1755,101 @@ function aplicarDB(db) {
   if (db.podcasts)    podcasts    = db.podcasts;
   if (db.noticias)    noticias    = db.noticias;
   if (db.depoimentos) depoimentos = db.depoimentos;
+  if (db.reels)       _reelsCfg   = db.reels;
+  if (db.igCfg)       _igCfg      = db.igCfg;
   if (db.config)      aplicarConfig(db.config);
 }
 
+// ── REELS & IG CONFIG ─────────────────────────────
+let _reelsCfg = null;
+let _igCfg    = null;
+
+function getReelsCfg() {
+  const saved = _reelsCfg;
+  // Also read live from DOM if admin is open
+  const items = [...document.querySelectorAll('.adm-reel-input')];
+  if (items.length) return items.map(inp => inp.value.trim()).filter(Boolean);
+  return saved || [
+    'https://www.instagram.com/reel/DGOTGSMy2S3/',
+    'https://www.instagram.com/reel/DVdh1MRDf4W/',
+    'https://www.instagram.com/reel/DVbTJ4rlt6F/',
+    'https://www.instagram.com/reel/DVcUCgWCaOK/',
+    'https://www.instagram.com/reel/DVcGFTxkROB/',
+    'https://www.instagram.com/reel/DVcE1gdDyrG/',
+    'https://www.instagram.com/reel/DVcDzASD9uh/',
+  ];
+}
+
+function getIGCfg() {
+  const url = document.getElementById('ig-url')?.value;
+  const handle = document.getElementById('ig-handle')?.value;
+  if (url || handle) return { url: url || 'https://www.instagram.com/temnolimao/', handle: handle || '@temnolimao' };
+  return _igCfg || { url: 'https://www.instagram.com/temnolimao/', handle: '@temnolimao' };
+}
+
+function salvarConfigIG() {
+  _igCfg    = getIGCfg();
+  _reelsCfg = getReelsCfg();
+  salvarDB();
+  // Update site Instagram section
+  renderReels(_reelsCfg);
+  toast('Instagram salvo! ✅');
+}
+
+function renderReels(reelsList) {
+  const container = document.querySelector('.tnl-ig-reel-track');
+  if (!container) return;
+  container.innerHTML = reelsList.map(url => {
+    const id = url.replace(/.*\/reel\/([^/]+)\/.*/,'$1');
+    return `
+    <div class="tnl-ig-reel-card">
+      <div class="tnl-ig-reel-frame-wrap">
+        <iframe class="tnl-ig-reel-frame" src="https://www.instagram.com/reel/${id}/embed/" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+      </div>
+      <div class="tnl-ig-reel-footer">
+        <div class="tnl-ig-reel-dot"></div>
+        <div class="tnl-ig-reel-label">@temnolimao</div>
+      </div>
+    </div>`;
+  }).join('') + container.innerHTML.replace(/<div class="tnl-ig-reel-card">[\s\S]*?<\/div>\s*<\/div>/g,'');
+}
+
+function renderAdmIG() {
+  const cfg = _igCfg || { url: 'https://www.instagram.com/temnolimao/', handle: '@temnolimao' };
+  const el = document.getElementById('ig-url');
+  if (el) el.value = cfg.url;
+  const he = document.getElementById('ig-handle');
+  if (he) he.value = cfg.handle;
+
+  const reels = _reelsCfg || getReelsCfg();
+  const cnt = document.getElementById('cnt-ig');
+  if (cnt) cnt.textContent = `(${reels.length} reels)`;
+
+  const list = document.getElementById('ig-reels-list');
+  if (!list) return;
+  list.innerHTML = reels.map((url, i) => `
+    <div style="display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center">
+      <input class="adm-search adm-reel-input" style="margin:0;flex:1" type="text" value="${url}" placeholder="https://www.instagram.com/reel/...">
+      <button class="adm-sm-btn del" onclick="removeReel(${i})" title="Remover">✕</button>
+    </div>`).join('');
+}
+
+function addReel() {
+  _reelsCfg = getReelsCfg();
+  _reelsCfg.push('');
+  renderAdmIG();
+}
+
+function removeReel(i) {
+  _reelsCfg = getReelsCfg();
+  _reelsCfg.splice(i, 1);
+  salvarDB();
+  renderAdmIG();
+  renderReels(_reelsCfg);
+  toast('Reel removido.');
+}
+
+// ── CONFIG ────────────────────────────────────────
 function lerConfig() {
   const g = id => document.getElementById(id);
   return {
@@ -1568,38 +1858,22 @@ function lerConfig() {
     ig:    g('cfg-ig')   ?.value || 'https://www.instagram.com/temnolimao/',
     tt:    g('cfg-tt')   ?.value || 'https://www.tiktok.com/@temnolimao',
     yt:    g('cfg-yt')   ?.value || 'https://www.youtube.com/@temnolimao110',
-    h1:    g('cfg-h1')   ?.value || 'Tem no Limão?',
-    h2:    g('cfg-h2')   ?.value || 'Tudo e muito mais.',
+    h1:    g('cfg-h1')   ?.value || '', h2: g('cfg-h2')?.value || '',
     sub:   g('cfg-sub')  ?.value || '',
-    s1n:   g('cfg-s1n')  ?.value || '1',  s1l: g('cfg-s1l')?.value || 'Bairro',
-    s2n:   g('cfg-s2n')  ?.value || '12', s2l: g('cfg-s2l')?.value || 'Moradores',
-    s3n:   g('cfg-s3n')  ?.value || '200',s3l: g('cfg-s3l')?.value || 'Negócios',
   };
 }
 function aplicarConfig(cfg) {
   if (!cfg) return;
   const g = id => document.getElementById(id);
-  if (g('cfg-wpp'))   g('cfg-wpp').value   = cfg.wpp   || '';
-  if (g('cfg-email')) g('cfg-email').value = cfg.email || '';
-  if (g('cfg-ig'))    g('cfg-ig').value    = cfg.ig    || '';
-  if (g('cfg-tt'))    g('cfg-tt').value    = cfg.tt    || '';
-  if (g('cfg-yt'))    g('cfg-yt').value    = cfg.yt    || '';
-  if (g('cfg-h1'))    g('cfg-h1').value    = cfg.h1    || '';
-  if (g('cfg-h2'))    g('cfg-h2').value    = cfg.h2    || '';
-  if (g('cfg-sub'))   g('cfg-sub').value   = cfg.sub   || '';
-  if (g('cfg-s1n'))   g('cfg-s1n').value   = cfg.s1n   || '';
-  if (g('cfg-s1l'))   g('cfg-s1l').value   = cfg.s1l   || '';
-  if (g('cfg-s2n'))   g('cfg-s2n').value   = cfg.s2n   || '';
-  if (g('cfg-s2l'))   g('cfg-s2l').value   = cfg.s2l   || '';
-  if (g('cfg-s3n'))   g('cfg-s3n').value   = cfg.s3n   || '';
-  if (g('cfg-s3l'))   g('cfg-s3l').value   = cfg.s3l   || '';
+  ['wpp','email','ig','tt','yt','h1','h2','sub'].forEach(k => { if(g('cfg-'+k)) g('cfg-'+k).value = cfg[k]||''; });
 }
 function salvarConfig() {
   const s1 = document.getElementById('cfg-senha')?.value;
   const s2 = document.getElementById('cfg-senha2')?.value;
   if (s1 && s1 !== s2) { alert('As senhas não coincidem!'); return; }
   if (s1) localStorage.setItem(SENHA_KEY, s1);
-  salvarDB(); toast('Configurações salvas! ✅');
+  salvarDB();
+  toast('Configurações salvas! ✅');
 }
 function resetarTudo() {
   if (!confirm('Apagar todas as alterações e restaurar dados originais?')) return;
@@ -1607,14 +1881,16 @@ function resetarTudo() {
   toast('Restaurando...', 1500); setTimeout(() => location.reload(), 1500);
 }
 
+// ── UTILS ──────────────────────────────────────────
 function toast(msg, dur=2500) {
   const t = document.createElement('div');
   t.textContent = msg;
   Object.assign(t.style, {
     position:'fixed', bottom:'2rem', left:'50%', transform:'translateX(-50%)',
-    background:'var(--dark)', color:'var(--limao)', padding:'.75rem 1.5rem',
+    background:'#1c2412', color:'#C8E04A', padding:'.75rem 1.5rem',
     borderRadius:'2rem', fontWeight:'700', fontSize:'.875rem', zIndex:'999999',
-    boxShadow:'0 8px 32px rgba(0,0,0,.4)', pointerEvents:'none',
+    boxShadow:'0 8px 32px rgba(0,0,0,.6)', border:'1px solid rgba(200,224,74,.3)',
+    pointerEvents:'none',
   });
   document.body.appendChild(t);
   setTimeout(() => t.remove(), dur);
@@ -1622,6 +1898,7 @@ function toast(msg, dur=2500) {
 function nextId(arr) { return arr.length ? Math.max(...arr.map(x=>x.id||0))+1 : 1; }
 function fv(id) { const el=document.getElementById(id); return el?el.value.trim():''; }
 
+// ── LOGIN / NAV ────────────────────────────────────
 function admLogin() {
   if (document.getElementById('adm-pwd').value === getSenha()) {
     document.getElementById('adm-login-box').style.display = 'none';
@@ -1640,9 +1917,9 @@ function admBack() {
 }
 function admLogout() {
   document.getElementById('admin-overlay').classList.remove('active');
-  document.getElementById('adm-login-box').style.display='';
+  document.getElementById('adm-login-box').style.display = '';
   document.getElementById('adm-panel').classList.remove('active');
-  document.getElementById('adm-pwd').value='';
+  document.getElementById('adm-pwd').value = '';
   history.replaceState(null,'',location.pathname);
 }
 function admNav(el, id) {
@@ -1650,89 +1927,188 @@ function admNav(el, id) {
   document.querySelectorAll('.adm-sec').forEach(s=>s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('adm-'+id).classList.add('active');
+  if (id === 'ig') renderAdmIG();
 }
 
+// ── RENDER ALL ─────────────────────────────────────
 function renderAdmAll() {
-  renderDashStats(); renderTblNegs(); renderTblVags(); renderTblPods(); renderTblNots(); renderTblDeps();
+  renderDashStats();
+  renderTblNegs(); renderTblVags(); renderTblPods(); renderTblNots(); renderTblDeps();
+  renderAdmIG();
 }
+
 function renderDashStats() {
   const el = document.getElementById('dash-stats'); if(!el) return;
-  el.innerHTML = [
-    {n:negocios.length,l:'Negócios'},{n:vagas.length,l:'Vagas'},
-    {n:podcasts.length,l:'Podcasts'},{n:noticias.length,l:'Notícias'},
-    {n:depoimentos.length,l:'Depoimts'}
-  ].map(s=>`<div class="adm-stat-box"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
-}
-function renderTblNegs() {
-  const cnt=document.getElementById('cnt-negs'); if(cnt) cnt.textContent=negocios.length+' negócios';
-  document.getElementById('tbl-negs').innerHTML = negocios.map((n,i)=>`
-    <tr><td><strong>${n.nome}</strong></td>
-    <td><span class="adm-badge adm-badge-g">${n.cat}</span></td>
-    <td style="font-size:.75rem;color:#888;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.end||'—'}</td>
-    <td style="font-size:.72rem">${n.tipo==='wpp'?'📱 WPP':'🌐 Site'}</td>
-    <td><div class="adm-td-acts">
-      <button class="adm-sm-btn" onclick="editNeg(${i})">Editar</button>
-      <button class="adm-sm-btn del" onclick="delNeg(${i})">Remover</button>
-    </div></td></tr>`).join('');
-}
-function renderTblVags() {
-  const cnt=document.getElementById('cnt-vags'); if(cnt) cnt.textContent=vagas.length+' vagas';
-  document.getElementById('tbl-vags').innerHTML = vagas.map((v,i)=>`
-    <tr><td><strong>${v.cargo}</strong></td><td>${v.empresa}</td>
-    <td><span class="adm-badge adm-badge-${v.tipo==='CLT'?'b':'o'}">${v.tipo}</span></td>
-    <td style="font-size:.78rem">${v.sal}</td>
-    <td><div class="adm-td-acts">
-      <button class="adm-sm-btn" onclick="editVag(${i})">Editar</button>
-      <button class="adm-sm-btn del" onclick="delVag(${i})">Remover</button>
-    </div></td></tr>`).join('');
-}
-function renderTblPods() {
-  const cnt=document.getElementById('cnt-pods'); if(cnt) cnt.textContent=podcasts.length+' episódios';
-  document.getElementById('tbl-pods').innerHTML = podcasts.map((p,i)=>`
-    <tr><td><strong>${p.ep}</strong></td>
-    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.titulo}</td>
-    <td style="font-size:.75rem;color:#888;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.guest}</td>
-    <td>${p.dur}</td><td>${p.destaque?'⭐':'—'}</td>
-    <td><div class="adm-td-acts">
-      <button class="adm-sm-btn" onclick="editPod(${i})">Editar</button>
-      <button class="adm-sm-btn del" onclick="delPod(${i})">Remover</button>
-    </div></td></tr>`).join('');
-}
-function renderTblNots() {
-  const cnt=document.getElementById('cnt-nots'); if(cnt) cnt.textContent=noticias.length+' notícias';
-  document.getElementById('tbl-nots').innerHTML = noticias.map((n,i)=>`
-    <tr><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><strong>${n.titulo}</strong></td>
-    <td><span class="adm-badge adm-badge-b">${n.cat}</span></td>
-    <td style="font-size:.75rem">${n.data}</td><td>${n.featured?'⭐':'—'}</td>
-    <td><div class="adm-td-acts">
-      <button class="adm-sm-btn" onclick="editNot(${i})">Editar</button>
-      <button class="adm-sm-btn del" onclick="delNot(${i})">Remover</button>
-    </div></td></tr>`).join('');
-}
-function renderTblDeps() {
-  const cnt=document.getElementById('cnt-deps'); if(cnt) cnt.textContent=depoimentos.length+' depoimentos';
-  document.getElementById('tbl-deps').innerHTML = depoimentos.map((d,i)=>`
-    <tr><td><strong>${d.nome}</strong></td>
-    <td style="font-size:.78rem;color:#888">${d.role}</td>
-    <td style="font-size:.75rem;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(d.texto||'').substring(0,60)}…</td>
-    <td>${d.featured?'⭐':'—'}</td>
-    <td><div class="adm-td-acts">
-      <button class="adm-sm-btn" onclick="editDep(${i})">Editar</button>
-      <button class="adm-sm-btn del" onclick="delDep(${i})">Remover</button>
-    </div></td></tr>`).join('');
+  const stats = [
+    { icon:'🏪', num: negocios.length, lbl:'Negócios', sub: negocios.filter(x=>x.paused).length+' pausados', sec:'negs' },
+    { icon:'📰', num: noticias.length, lbl:'Notícias', sub: noticias.filter(x=>x.paused).length+' pausadas', sec:'nots' },
+    { icon:'💼', num: vagas.length,    lbl:'Vagas',    sub: vagas.filter(x=>x.paused).length+' pausadas', sec:'vags' },
+    { icon:'🎙️', num: podcasts.length, lbl:'Podcasts', sub: podcasts.filter(x=>x.paused).length+' pausados', sec:'pods' },
+    { icon:'📸', num: (_reelsCfg||getReelsCfg()).length, lbl:'Reels', sub: '0 pausados', sec:'ig' },
+  ];
+  el.innerHTML = stats.map(s=>`
+    <div class="adm-stat-card" onclick="admNav(document.querySelector('[data-sec=${s.sec}]'),'${s.sec}')">
+      <div class="icon">${s.icon}</div>
+      <div class="num">${s.num}</div>
+      <div class="lbl">${s.lbl}</div>
+      <div class="sub-lbl">${s.num - parseInt(s.sub)} ativos · ${s.sub}</div>
+    </div>`).join('');
 }
 
+// ── NEGÓCIOS TABLE ─────────────────────────────────
+function renderTblNegs() {
+  const cnt=document.getElementById('cnt-negs');
+  const q = (document.getElementById('srch-negs')?.value||'').toLowerCase();
+  let lista = negocios.filter(n => !q || n.nome.toLowerCase().includes(q) || n.cat.toLowerCase().includes(q));
+  if(cnt) cnt.textContent = `(${negocios.length})`;
+
+  document.getElementById('tbl-negs').innerHTML = lista.map((n,i)=> {
+    const tel = n.wpp ? `(${n.wpp.substring(2,4)}) ${n.wpp.substring(4,9)}-${n.wpp.substring(9)}` : '—';
+    const rowStyle = n.paused ? 'opacity:.5' : '';
+    return `<tr style="${rowStyle}">
+      <td><div style="display:flex;align-items:center;gap:.5rem">
+        ${n.logo ? `<img src="${n.logo}" style="width:28px;height:28px;object-fit:contain;border-radius:.3rem;border:1px solid rgba(255,255,255,.1);background:#0d1008">` : '<span style="font-size:1.1rem">'+getCatEmoji(n.cat)+'</span>'}
+        <strong>${n.nome}</strong>
+      </div></td>
+      <td><span class="adm-badge badge-cat">${n.cat}</span></td>
+      <td style="font-size:.78rem">${tel}</td>
+      <td style="font-size:.72rem;color:var(--adm-muted);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.end||'—'}</td>
+      <td><span class="adm-badge ${n.paused?'badge-paused':'badge-active'}">${n.paused?'⏸ Pausado':'● Ativo'}</span></td>
+      <td><div class="adm-td-acts">
+        <button class="adm-sm-btn" onclick="editNeg(${i})">✏️ Editar</button>
+        <button class="adm-sm-btn ${n.paused?'unpause':'pause'}" onclick="togglePause('negs',${i})">${n.paused?'▶ Ativar':'⏸ Pausar'}</button>
+        <button class="adm-sm-btn del" onclick="delItem('negs',${i})">🗑</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── VAGAS TABLE ────────────────────────────────────
+function renderTblVags() {
+  const cnt=document.getElementById('cnt-vags'); if(cnt) cnt.textContent=`(${vagas.length})`;
+  document.getElementById('tbl-vags').innerHTML = vagas.map((v,i)=>`
+    <tr style="${v.paused?'opacity:.5':''}">
+      <td><strong>${v.cargo}</strong></td>
+      <td>${v.empresa}</td>
+      <td><span class="adm-badge ${v.tipo==='CLT'?'badge-clt':'badge-pj'}">${v.tipo}</span></td>
+      <td style="font-size:.78rem">${v.sal}</td>
+      <td><span class="adm-badge ${v.paused?'badge-paused':'badge-active'}">${v.paused?'⏸ Pausado':'● Ativo'}</span></td>
+      <td><div class="adm-td-acts">
+        <button class="adm-sm-btn" onclick="editVag(${i})">✏️ Editar</button>
+        <button class="adm-sm-btn ${v.paused?'unpause':'pause'}" onclick="togglePause('vags',${i})">${v.paused?'▶ Ativar':'⏸ Pausar'}</button>
+        <button class="adm-sm-btn del" onclick="delItem('vags',${i})">🗑</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── PODCAST TABLE ──────────────────────────────────
+function renderTblPods() {
+  const cnt=document.getElementById('cnt-pods'); if(cnt) cnt.textContent=`(${podcasts.length})`;
+  document.getElementById('tbl-pods').innerHTML = podcasts.map((p,i)=>`
+    <tr style="${p.paused?'opacity:.5':''}">
+      <td><strong>${p.ep}</strong></td>
+      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.titulo}</td>
+      <td style="font-size:.75rem;color:var(--adm-muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.guest}</td>
+      <td>${p.dur}</td>
+      <td style="font-size:.75rem">
+        ${p.ytUrl?`<a href="${p.ytUrl}" target="_blank" style="color:#ff4444;text-decoration:none" title="YouTube">▶ YT</a> `:''}
+        ${p.spUrl?`<a href="${p.spUrl}" target="_blank" style="color:#1db954;text-decoration:none" title="Spotify">♪ SP</a>`:''}
+        ${!p.ytUrl && !p.spUrl ? '—':''}
+      </td>
+      <td>${p.destaque?'<span class="adm-badge badge-feat">⭐</span>':'—'}</td>
+      <td><span class="adm-badge ${p.paused?'badge-paused':'badge-active'}">${p.paused?'⏸ Pausado':'● Ativo'}</span></td>
+      <td><div class="adm-td-acts">
+        <button class="adm-sm-btn" onclick="editPod(${i})">✏️ Editar</button>
+        <button class="adm-sm-btn ${p.paused?'unpause':'pause'}" onclick="togglePause('pods',${i})">${p.paused?'▶ Ativar':'⏸ Pausar'}</button>
+        <button class="adm-sm-btn del" onclick="delItem('pods',${i})">🗑</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── NOTÍCIAS TABLE ─────────────────────────────────
+function renderTblNots() {
+  const cnt=document.getElementById('cnt-nots'); if(cnt) cnt.textContent=`(${noticias.length})`;
+  document.getElementById('tbl-nots').innerHTML = noticias.map((n,i)=>`
+    <tr style="${n.paused?'opacity:.5':''}">
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><strong>${n.titulo}</strong></td>
+      <td><span class="adm-badge badge-cat">${n.cat}</span></td>
+      <td style="font-size:.75rem">${n.data}</td>
+      <td>${n.featured?'<span class="adm-badge badge-feat">⭐</span>':'—'}</td>
+      <td><span class="adm-badge ${n.paused?'badge-paused':'badge-active'}">${n.paused?'⏸ Pausado':'● Ativo'}</span></td>
+      <td><div class="adm-td-acts">
+        <button class="adm-sm-btn" onclick="editNot(${i})">✏️ Editar</button>
+        <button class="adm-sm-btn ${n.paused?'unpause':'pause'}" onclick="togglePause('nots',${i})">${n.paused?'▶ Ativar':'⏸ Pausar'}</button>
+        <button class="adm-sm-btn del" onclick="delItem('nots',${i})">🗑</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── DEPOIMENTOS TABLE ──────────────────────────────
+function renderTblDeps() {
+  const cnt=document.getElementById('cnt-deps'); if(cnt) cnt.textContent=`(${depoimentos.length})`;
+  document.getElementById('tbl-deps').innerHTML = depoimentos.map((d,i)=>`
+    <tr style="${d.paused?'opacity:.5':''}">
+      <td><strong>${d.nome}</strong></td>
+      <td style="font-size:.78rem;color:var(--adm-muted)">${d.role}</td>
+      <td style="font-size:.75rem;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(d.texto||'').substring(0,55)}…</td>
+      <td>${d.featured?'<span class="adm-badge badge-feat">⭐</span>':'—'}</td>
+      <td><span class="adm-badge ${d.paused?'badge-paused':'badge-active'}">${d.paused?'⏸ Pausado':'● Ativo'}</span></td>
+      <td><div class="adm-td-acts">
+        <button class="adm-sm-btn" onclick="editDep(${i})">✏️ Editar</button>
+        <button class="adm-sm-btn ${d.paused?'unpause':'pause'}" onclick="togglePause('deps',${i})">${d.paused?'▶ Ativar':'⏸ Pausar'}</button>
+        <button class="adm-sm-btn del" onclick="delItem('deps',${i})">🗑</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── PAUSE / DELETE (generic) ──────────────────────
+function togglePause(type, i) {
+  const map = { negs: negocios, vags: vagas, pods: podcasts, nots: noticias, deps: depoimentos };
+  const arr = map[type];
+  arr[i].paused = !arr[i].paused;
+  salvarDB();
+  const renders = { negs: [renderTblNegs, renderCards], vags: [renderTblVags, renderVagas], pods: [renderTblPods, renderPodcast], nots: [renderTblNots, renderNews], deps: [renderTblDeps, renderDep] };
+  renders[type]?.forEach(fn => fn());
+  renderDashStats();
+  toast(arr[i].paused ? '⏸ Item pausado — sumiu do site.' : '▶ Item reativado!');
+}
+
+function delItem(type, i) {
+  const map = { negs: negocios, vags: vagas, pods: podcasts, nots: noticias, deps: depoimentos };
+  const arr = map[type];
+  const name = arr[i].nome || arr[i].cargo || arr[i].titulo || arr[i].ep || arr[i].nome;
+  if (!confirm(`Remover "${name}"? Esta ação não pode ser desfeita.`)) return;
+  arr.splice(i,1);
+  salvarDB();
+  const renders = { negs: [renderTblNegs, renderCards], vags: [renderTblVags, renderVagas], pods: [renderTblPods, renderPodcast], nots: [renderTblNots, renderNews], deps: [renderTblDeps, renderDep] };
+  renders[type]?.forEach(fn => fn());
+  renderDashStats();
+  toast('Item removido.');
+}
+
+// ── RENDER SITE: respeita paused ──────────────────
+// NOTE: The site render functions must filter out paused items
+// We patch them to filter paused items:
+
+const _origRenderCards = renderCards;
+
+// ── MODAL ─────────────────────────────────────────
 function openModal(tipo, dados, idx) {
   document.getElementById('modal-box').innerHTML = buildModal(tipo, dados||{}, idx);
   document.getElementById('modal-bg').classList.add('active');
+  // Preview existing logo
+  if (dados?.logo) {
+    const prev = document.getElementById('logo-preview');
+    if (prev) { prev.src = dados.logo; prev.classList.add('visible'); }
+  }
 }
 function closeModal() { document.getElementById('modal-bg').classList.remove('active'); }
 document.getElementById('modal-bg').addEventListener('click', e => {
-  if (e.target===document.getElementById('modal-bg')) closeModal();
+  if (e.target === document.getElementById('modal-bg')) closeModal();
 });
 
 const _CATS_OPT = ['Alimentação','Saúde','Estética','Academia','Eventos','Educação','Tecnologia','Serviços','Drone','Materiais Elétricos','Supermercado','Jóias / Acessórios','Odontologia','Imobiliária','Advocacia'].map(c=>`<option>${c}</option>`).join('');
-function sel(opts, val) { return opts.replace(`>${val}<`,` selected>${val}<`); }
+function selOpt(opts, val) { return opts.replace(`>${val}<`,` selected>${val}<`); }
 
 function buildModal(tipo, d, idx) {
   const tit = idx!=null ? 'Editar' : 'Novo';
@@ -1740,43 +2116,64 @@ function buildModal(tipo, d, idx) {
 
   if (tipo==='neg') return `<h4>${tit} Negócio</h4>
     <div class="fg"><label>Nome *</label><input id="m-nome" type="text" value="${d.nome||''}"></div>
-    <div class="fg"><label>Categoria *</label><select id="m-cat">${sel(_CATS_OPT, d.cat||'Alimentação')}</select></div>
+    <div class="fg"><label>Categoria *</label><select id="m-cat">${selOpt(_CATS_OPT, d.cat||'Alimentação')}</select></div>
     <div class="fg"><label>Descrição</label><textarea id="m-desc" rows="3">${d.desc||''}</textarea></div>
     <div class="fg"><label>Endereço</label><input id="m-end" type="text" value="${d.end||''}"></div>
     <div class="fg"><label>Horário</label><input id="m-hora" type="text" value="${d.hora||''}" placeholder="Seg–Sex 9h–18h"></div>
-    <div class="fg-row"><div class="fg"><label>Contato</label><select id="m-tipo"><option value="wpp"${d.tipo==='wpp'?' selected':''}>WhatsApp</option><option value="site"${d.tipo==='site'?' selected':''}>Site</option></select></div>
-    <div class="fg"><label>Número WPP (só dígitos)</label><input id="m-wpp" type="text" value="${d.wpp||''}" placeholder="5511999999999"></div></div>
+    <div class="fg-row">
+      <div class="fg"><label>Contato</label><select id="m-tipo"><option value="wpp"${d.tipo==='wpp'?' selected':''}>WhatsApp</option><option value="site"${d.tipo==='site'?' selected':''}>Site</option></select></div>
+      <div class="fg"><label>Número WPP (só dígitos)</label><input id="m-wpp" type="text" value="${d.wpp||''}" placeholder="5511999999999"></div>
+    </div>
     <div class="fg"><label>URL do Site</label><input id="m-site" type="text" value="${d.siteUrl||''}" placeholder="https://..."></div>
-    <div class="fg"><label>URL da Logo</label><input id="m-logo" type="text" value="${d.logo||''}" placeholder="https://... ou /_assets/v11/..."></div>
+    <div class="fg">
+      <label>Logo (PNG/JPG)</label>
+      <input type="file" id="m-logo-file" accept="image/*" onchange="previewLogo(this)" style="width:100%;padding:.5rem;border:1px solid rgba(200,224,74,.2);border-radius:.5rem;background:#1c2412;color:rgba(255,255,255,.7);font-size:.82rem">
+      <div class="logo-preview-wrap">
+        <img id="logo-preview" class="logo-preview ${d.logo?'visible':''}" src="${d.logo||''}">
+      </div>
+      <input type="hidden" id="m-logo-data" value="${d.logo||''}">
+    </div>
     ${acts}`;
 
   if (tipo==='vag') return `<h4>${tit} Vaga</h4>
     <div class="fg"><label>Cargo *</label><input id="m-cargo" type="text" value="${d.cargo||''}"></div>
-    <div class="fg-row"><div class="fg"><label>Empresa *</label><input id="m-emp" type="text" value="${d.empresa||''}"></div>
-    <div class="fg"><label>Tipo</label><select id="m-tipo"><option${d.tipo==='CLT'?' selected':''}>CLT</option><option${d.tipo==='PJ / Autônomo'?' selected':''}>PJ / Autônomo</option><option${d.tipo==='Estágio'?' selected':''}>Estágio</option></select></div></div>
-    <div class="fg-row"><div class="fg"><label>Área</label><input id="m-area" type="text" value="${d.area||''}"></div>
-    <div class="fg"><label>Emoji</label><input id="m-icon" type="text" value="${d.icon||'💼'}" style="max-width:70px"></div></div>
-    <div class="fg-row"><div class="fg"><label>Salário</label><input id="m-sal" type="text" value="${d.sal||''}" placeholder="R$ 2.000–R$ 3.000"></div>
-    <div class="fg"><label>Local</label><input id="m-local" type="text" value="${d.local||''}" placeholder="Limão, SP"></div></div>
+    <div class="fg-row">
+      <div class="fg"><label>Empresa *</label><input id="m-emp" type="text" value="${d.empresa||''}"></div>
+      <div class="fg"><label>Tipo</label><select id="m-tipo"><option${d.tipo==='CLT'?' selected':''}>CLT</option><option${d.tipo==='PJ / Autônomo'?' selected':''}>PJ / Autônomo</option><option${d.tipo==='Estágio'?' selected':''}>Estágio</option></select></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Área</label><input id="m-area" type="text" value="${d.area||''}"></div>
+      <div class="fg"><label>Emoji</label><input id="m-icon" type="text" value="${d.icon||'💼'}" style="max-width:70px"></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Salário</label><input id="m-sal" type="text" value="${d.sal||''}" placeholder="R$ 2.000–R$ 3.000"></div>
+      <div class="fg"><label>Local</label><input id="m-local" type="text" value="${d.local||''}" placeholder="Limão, SP"></div>
+    </div>
     <div class="fg"><label>Descrição</label><textarea id="m-desc" rows="3">${d.desc||''}</textarea></div>
     <div class="fg"><label>WhatsApp (só dígitos)</label><input id="m-wpp" type="text" value="${(d.wpp||'').replace(/.*wa\.me\//,'').replace(/\?.*/,'')}" placeholder="5511983592721"></div>
     ${acts}`;
 
   if (tipo==='pod') return `<h4>${tit} Episódio</h4>
-    <div class="fg-row"><div class="fg"><label>Número (ex: EP 13)</label><input id="m-ep" type="text" value="${d.ep||''}"></div>
-    <div class="fg"><label>Duração</label><input id="m-dur" type="text" value="${d.dur||''}" placeholder="42 min"></div></div>
+    <div class="fg-row">
+      <div class="fg"><label>Número (ex: EP 13)</label><input id="m-ep" type="text" value="${d.ep||''}"></div>
+      <div class="fg"><label>Duração</label><input id="m-dur" type="text" value="${d.dur||''}" placeholder="42 min"></div>
+    </div>
     <div class="fg"><label>Título *</label><input id="m-titulo" type="text" value="${d.titulo||''}"></div>
     <div class="fg"><label>Convidado(a)</label><input id="m-guest" type="text" value="${d.guest||''}"></div>
     <div class="fg"><label>Data</label><input id="m-data" type="text" value="${d.data||''}" placeholder="25 fev 2026"></div>
-    <div class="fg-row"><div class="fg"><label>Link YouTube</label><input id="m-yt" type="text" value="${d.ytUrl||''}" placeholder="https://..."></div>
-    <div class="fg"><label>Link Spotify</label><input id="m-sp" type="text" value="${d.spUrl||''}" placeholder="https://..."></div></div>
+    <div class="fg-row">
+      <div class="fg"><label>🎬 Link YouTube</label><input id="m-yt" type="text" value="${d.ytUrl||''}" placeholder="https://youtu.be/..."></div>
+      <div class="fg"><label>🎵 Link Spotify</label><input id="m-sp" type="text" value="${d.spUrl||''}" placeholder="https://open.spotify.com/..."></div>
+    </div>
     <div class="fg"><label>Destaque?</label><select id="m-dest"><option value="1"${d.destaque?' selected':''}>Sim — ep. principal</option><option value="0"${!d.destaque?' selected':''}>Não</option></select></div>
     ${acts}`;
 
   if (tipo==='not') return `<h4>${tit} Notícia</h4>
     <div class="fg"><label>Título *</label><input id="m-titulo" type="text" value="${d.titulo||''}"></div>
-    <div class="fg-row"><div class="fg"><label>Categoria</label><select id="m-cat"><option${d.cat==='Cultura'?' selected':''}>Cultura</option><option${d.cat==='Comunidade'?' selected':''}>Comunidade</option><option${d.cat==='Arte'?' selected':''}>Arte</option><option${d.cat==='Gastronomia'?' selected':''}>Gastronomia</option><option${d.cat==='Esporte'?' selected':''}>Esporte</option><option${d.cat==='Evento'?' selected':''}>Evento</option></select></div>
-    <div class="fg"><label>Tempo de leitura</label><input id="m-leit" type="text" value="${d.leit||''}" placeholder="4 min"></div></div>
+    <div class="fg-row">
+      <div class="fg"><label>Categoria</label><select id="m-cat"><option${d.cat==='Cultura'?' selected':''}>Cultura</option><option${d.cat==='Comunidade'?' selected':''}>Comunidade</option><option${d.cat==='Arte'?' selected':''}>Arte</option><option${d.cat==='Gastronomia'?' selected':''}>Gastronomia</option><option${d.cat==='Esporte'?' selected':''}>Esporte</option><option${d.cat==='Evento'?' selected':''}>Evento</option></select></div>
+      <div class="fg"><label>Tempo de leitura</label><input id="m-leit" type="text" value="${d.leit||''}" placeholder="4 min"></div>
+    </div>
     <div class="fg"><label>Data</label><input id="m-data" type="text" value="${d.data||''}" placeholder="15 fev 2026"></div>
     <div class="fg"><label>Resumo</label><textarea id="m-exc" rows="3">${d.excerpt||''}</textarea></div>
     <div class="fg"><label>Destaque?</label><select id="m-feat"><option value="1"${d.featured?' selected':''}>Sim — card grande</option><option value="0"${!d.featured?' selected':''}>Não</option></select></div>
@@ -1791,23 +2188,33 @@ function buildModal(tipo, d, idx) {
   return '';
 }
 
-function editNeg(i) { openModal('neg', negocios[i], i); }
-function delNeg(i) {
-  if (!confirm(`Remover "${negocios[i].nome}"?`)) return;
-  negocios.splice(i,1); salvarDB(); renderTblNegs(); renderDashStats(); negociosVisiveis=6; renderCards();
-  toast('Negócio removido.');
+// Logo file → base64
+function previewLogo(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const data = e.target.result;
+    document.getElementById('m-logo-data').value = data;
+    const prev = document.getElementById('logo-preview');
+    if (prev) { prev.src = data; prev.classList.add('visible'); }
+  };
+  reader.readAsDataURL(file);
 }
+
+// ── SAVE functions ─────────────────────────────────
+function editNeg(i) { openModal('neg', negocios[i], i); }
 function save_neg(idx) {
   if (!fv('m-nome')) { alert('Nome é obrigatório'); return; }
-  const BASE = 'https://dizzy-hug-77416784.figma.site';
-  const logoRaw = fv('m-logo');
+  const logoData = document.getElementById('m-logo-data')?.value || '';
   const obj = {
     id: idx!=null ? negocios[idx].id : nextId(negocios),
     nome: fv('m-nome'), cat: fv('m-cat'), desc: fv('m-desc'),
     end: fv('m-end'), hora: fv('m-hora'), tipo: fv('m-tipo'),
     wpp: fv('m-wpp'), siteUrl: fv('m-site'),
-    logo: logoRaw ? (logoRaw.startsWith('http') ? logoRaw : BASE+logoRaw) : '',
+    logo: logoData || (idx!=null ? negocios[idx].logo : ''),
     logoCls: '',
+    paused: idx!=null ? (negocios[idx].paused||false) : false,
   };
   if (idx!=null) negocios[idx]=obj; else negocios.push(obj);
   salvarDB(); renderTblNegs(); renderDashStats(); negociosVisiveis=6; renderCards();
@@ -1815,11 +2222,6 @@ function save_neg(idx) {
 }
 
 function editVag(i) { openModal('vag', vagas[i], i); }
-function delVag(i) {
-  if (!confirm(`Remover vaga "${vagas[i].cargo}"?`)) return;
-  vagas.splice(i,1); salvarDB(); renderTblVags(); renderDashStats(); renderVagas();
-  toast('Vaga removida.');
-}
 function save_vag(idx) {
   if (!fv('m-cargo')) { alert('Cargo é obrigatório'); return; }
   const wppNum = fv('m-wpp').replace(/\D/g,'');
@@ -1829,6 +2231,7 @@ function save_vag(idx) {
     icon: fv('m-icon')||'💼', sal: fv('m-sal'), local: fv('m-local'),
     desc: fv('m-desc'), tempo: 'Recente',
     wpp: `https://wa.me/${wppNum}?text=Oi!%20Vi%20a%20vaga%20de%20${encodeURIComponent(cargo)}%20pelo%20Tem%20no%20Lim%C3%A3o%20%F0%9F%8D%8B%20%E2%80%94%20tenho%20interesse!`,
+    paused: idx!=null ? (vagas[idx].paused||false) : false,
   };
   if (idx!=null) vagas[idx]=obj; else vagas.push(obj);
   salvarDB(); renderTblVags(); renderDashStats(); renderVagas();
@@ -1836,18 +2239,14 @@ function save_vag(idx) {
 }
 
 function editPod(i) { openModal('pod', podcasts[i], i); }
-function delPod(i) {
-  if (!confirm(`Remover "${podcasts[i].titulo}"?`)) return;
-  podcasts.splice(i,1); salvarDB(); renderTblPods(); renderDashStats(); renderPodcast();
-  toast('Episódio removido.');
-}
 function save_pod(idx) {
   if (!fv('m-titulo')) { alert('Título é obrigatório'); return; }
   const dest = fv('m-dest')==='1';
   if (dest) podcasts.forEach(p=>p.destaque=false);
   const obj = {
     ep: fv('m-ep'), titulo: fv('m-titulo'), guest: fv('m-guest'),
-    dur: fv('m-dur'), data: fv('m-data'), ytUrl: fv('m-yt'), spUrl: fv('m-sp'), destaque: dest,
+    dur: fv('m-dur'), data: fv('m-data'), ytUrl: fv('m-yt'), spUrl: fv('m-sp'),
+    destaque: dest, paused: idx!=null ? (podcasts[idx].paused||false) : false,
   };
   if (idx!=null) podcasts[idx]=obj; else podcasts.unshift(obj);
   salvarDB(); renderTblPods(); renderDashStats(); renderPodcast();
@@ -1855,11 +2254,6 @@ function save_pod(idx) {
 }
 
 function editNot(i) { openModal('not', noticias[i], i); }
-function delNot(i) {
-  if (!confirm('Remover esta notícia?')) return;
-  noticias.splice(i,1); salvarDB(); renderTblNots(); renderDashStats(); renderNews();
-  toast('Notícia removida.');
-}
 function save_not(idx) {
   if (!fv('m-titulo')) { alert('Título é obrigatório'); return; }
   const feat = fv('m-feat')==='1';
@@ -1867,6 +2261,7 @@ function save_not(idx) {
   const obj = {
     titulo: fv('m-titulo'), cat: fv('m-cat'), leit: fv('m-leit'),
     data: fv('m-data'), excerpt: fv('m-exc'), featured: feat, secondary: !feat,
+    paused: idx!=null ? (noticias[idx].paused||false) : false,
   };
   if (idx!=null) noticias[idx]=obj; else noticias.unshift(obj);
   salvarDB(); renderTblNots(); renderDashStats(); renderNews();
@@ -1874,11 +2269,6 @@ function save_not(idx) {
 }
 
 function editDep(i) { openModal('dep', depoimentos[i], i); }
-function delDep(i) {
-  if (!confirm(`Remover depoimento de "${depoimentos[i].nome}"?`)) return;
-  depoimentos.splice(i,1); salvarDB(); renderTblDeps(); renderDashStats(); renderDep();
-  toast('Depoimento removido.');
-}
 function save_dep(idx) {
   const texto = fv('m-texto');
   if (!fv('m-nome')||!texto) { alert('Nome e depoimento são obrigatórios'); return; }
@@ -1886,7 +2276,8 @@ function save_dep(idx) {
   if (feat) depoimentos.forEach(d=>d.featured=false);
   const obj = {
     nome: fv('m-nome'), role: fv('m-role'),
-    texto: `"${texto.replace(/^"|"$/g,'')}"`, featured: feat,
+    texto: `"${texto.replace(/^"|"$/g,'')}"`,
+    featured: feat, paused: idx!=null ? (depoimentos[idx].paused||false) : false,
   };
   if (idx!=null) depoimentos[idx]=obj; else depoimentos.push(obj);
   salvarDB(); renderTblDeps(); renderDashStats(); renderDep();
@@ -1966,6 +2357,8 @@ renderPodcast();
 renderNews();
 renderDep();
 renderVagas();
+// Apply saved reels if any
+if (_reelsCfg) renderReels(_reelsCfg);
 checkHash();
 </script>
 </body>
