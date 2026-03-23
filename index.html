@@ -939,9 +939,13 @@ tr:hover td { background: rgba(255,255,255,.02); }
       <div class="adm-emoji">🍋</div>
       <h2>Tem no Limão</h2>
       <p>Painel Administrativo</p>
-      <input type="password" id="adm-pwd" placeholder="••••••••" autocomplete="current-password">
+      <div style="position:relative;margin-bottom:.75rem;">
+        <input type="password" id="adm-pwd" placeholder="••••••••" autocomplete="current-password" style="width:100%;padding:.9rem 3rem .9rem 1.1rem;border:1.5px solid var(--adm-border);border-radius:.75rem;font-size:1rem;background:var(--adm-surface);color:var(--adm-text);outline:none;text-align:center;letter-spacing:4px;transition:border-color .2s;">
+        <button onclick="toggleAdmPwd()" type="button" id="adm-pwd-toggle" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--adm-muted);font-size:1.1rem;padding:0;line-height:1;" title="Mostrar/ocultar senha">👁</button>
+      </div>
       <button class="adm-login-btn" onclick="admLogin()">Entrar</button>
       <div class="adm-login-err" id="adm-err"></div>
+      <button onclick="admResetSenha()" type="button" style="margin-top:.75rem;background:none;border:none;color:var(--adm-muted);font-size:.75rem;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif;">Esqueci a senha</button>
     </div>
   </div>
 
@@ -2251,6 +2255,19 @@ function nextId(arr) { return arr.length ? Math.max(...arr.map(x=>x.id||0))+1 : 
 function fv(id) { const el=document.getElementById(id); return el?el.value.trim():''; }
 
 // ── LOGIN / NAV ────────────────────────────────────
+function toggleAdmPwd() {
+  const inp = document.getElementById('adm-pwd');
+  const btn = document.getElementById('adm-pwd-toggle');
+  if (inp.type === 'password') { inp.type = 'text'; inp.style.letterSpacing = 'normal'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; inp.style.letterSpacing = '4px'; btn.textContent = '👁'; }
+}
+function admResetSenha() {
+  if (confirm('Isso vai redefinir a senha do painel para "limao2024". Continuar?')) {
+    localStorage.removeItem('tnl_senha');
+    document.getElementById('adm-err').textContent = 'Senha redefinida! Use: limao2024';
+    document.getElementById('adm-err').style.color = '#2ecc71';
+  }
+}
 function admLogin() {
   if (document.getElementById('adm-pwd').value === getSenha()) {
     document.getElementById('adm-login-box').style.display = 'none';
