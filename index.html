@@ -563,8 +563,9 @@ tr:hover td { background: rgba(255,255,255,.02); }
 .tnl-card-ol-name { font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 700; color: white; margin-bottom: .35rem; flex-shrink: 0; line-height: 1.2; }
 .tnl-card-ol-desc { font-size: .73rem; color: rgba(255,255,255,.58); line-height: 1.45; flex: 1; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: .45rem; }
 .tnl-card-ol-meta { display: flex; flex-direction: column; gap: .2rem; margin-bottom: .55rem; flex-shrink: 0; }
-.tnl-card-ol-link { display: flex; align-items: center; gap: .28rem; font-size: .67rem; color: rgba(255,255,255,.42); text-decoration: none; transition: color .2s; font-family: 'DM Sans', sans-serif; line-height: 1.3; }
-.tnl-card-ol-link:hover { color: var(--limao); }
+.tnl-card-ol-link { display: flex; align-items: center; gap: .28rem; font-size: .67rem; color: rgba(200,224,74,.85); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(200,224,74,.35); transition: color .2s; font-family: 'DM Sans', sans-serif; line-height: 1.3; }
+.tnl-card-ol-link:hover { color: var(--limao); text-decoration-color: var(--limao); }
+.tnl-card-ol-hora { display: flex; align-items: center; gap: .28rem; font-size: .67rem; color: rgba(255,255,255,.42); font-family: 'DM Sans', sans-serif; line-height: 1.3; }
 .tnl-card-ol-wa {
   display: flex; align-items: center; justify-content: center; gap: .35rem;
   padding: .48rem .75rem; background: var(--wpp-green); color: white;
@@ -812,8 +813,8 @@ tr:hover td { background: rgba(255,255,255,.02); }
 
   /* ── HERO ── */
   .tnl-hero {
-    height: auto; max-height: none; min-height: 100svh;
-    padding: 5.5rem 1.25rem 3rem;
+    height: auto; max-height: none; min-height: unset;
+    padding: 6.5rem 1.25rem 2.5rem;
     justify-content: flex-start;
   }
   .tnl-hero-video-wrap {
@@ -825,26 +826,44 @@ tr:hover td { background: rgba(255,255,255,.02); }
                 linear-gradient(to top, var(--dark) 0%, transparent 30%);
   }
   .tnl-hero-title { font-size: clamp(2.2rem, 10vw, 3.5rem); margin-bottom: .65rem; }
-  .tnl-hero-subtitle { font-size: .95rem; max-width: 100%; margin-bottom: 1.75rem; }
-  .tnl-hero-actions { flex-direction: column; align-items: stretch; gap: .65rem; }
-  .tnl-btn-primary, .tnl-btn-secondary { justify-content: center; font-size: .9rem; padding: .85rem 1.5rem; width: 100%; }
-  .tnl-btn-outline { font-size: .85rem; padding: .65rem 1.25rem; }
-  .tnl-btn-dark { font-size: .9rem; padding: .85rem 1.75rem; }
-  .tnl-hero-stats {
-    position: static; margin-top: 2.5rem;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; width: 100%; text-align: center;
+  .tnl-hero-subtitle { font-size: .95rem; max-width: 100%; margin-bottom: 1.5rem; }
+  .tnl-hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
   }
-  .tnl-stat { text-align: center; }
-  .tnl-stat-number { font-size: 2rem; }
-  .tnl-stat-label { font-size: .62rem; }
+  .tnl-btn-primary, .tnl-btn-secondary {
+    justify-content: center;
+    font-size: .95rem;
+    padding: .7rem 1.25rem;
+    width: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: .4rem;
+  }
+  .tnl-btn-primary svg, .tnl-btn-secondary svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .tnl-btn-outline { font-size: .95rem; padding: .7rem 1.4rem; }
+  .tnl-btn-dark { font-size: .95rem; padding: .8rem 1.5rem; }
+  .tnl-hero-stats {
+    position: static; margin-top: 2rem;
+    display: flex; flex-direction: row;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 100%;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .tnl-stat { text-align: left; }
+  .tnl-stat-number { font-size: 1.9rem; }
+  .tnl-stat-label { font-size: .75rem; }
 
   /* ── SECTIONS genéricas ── */
-  .tnl-section { padding: 3.5rem 1.25rem; }
-  .tnl-section-label { font-size: .7rem; }
-  .tnl-section-title { font-size: clamp(1.75rem, 7vw, 2.4rem); }
-  .tnl-section-header { margin-bottom: 1.75rem; }
-  .tnl-view-all { font-size: .85rem; }
+  .tnl-section { padding: 3rem 1.25rem; }
+  .tnl-section-label { font-size: .75rem; }
+  .tnl-section-title { font-size: clamp(1.65rem, 6.5vw, 2.2rem); }
+  .tnl-section-header { margin-bottom: 1.5rem; gap: .75rem; }
+  .tnl-view-all { font-size: .82rem; }
 
   /* ── DIRECTORY / NEGÓCIOS ── */
   .tnl-filter-bar {
@@ -859,8 +878,11 @@ tr:hover td { background: rgba(255,255,255,.02); }
   }
   .tnl-filter-bar::-webkit-scrollbar { display: none; }
   .tnl-filter-btn { font-size: .82rem; padding: .4rem 1.1rem; flex-shrink: 0; white-space: nowrap; }
-  .tnl-businesses-grid { grid-template-columns: repeat(2, 1fr); gap: .65rem; }
-  .tnl-business-card { height: 175px; }
+  .tnl-businesses-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+  .tnl-business-card { height: 200px; }
+  /* Strip (nome visível antes do tap) */
+  .tnl-card-strip-cat { font-size: .75rem; }
+  .tnl-card-strip-name { font-size: .95rem; }
   /* Mobile: tap em vez de hover */
   .tnl-business-card:hover .tnl-card-overlay { transform: translateY(100%); }
   .tnl-business-card:hover .tnl-card-strip { opacity: 1; }
@@ -868,14 +890,16 @@ tr:hover td { background: rgba(255,255,255,.02); }
   .tnl-business-card:hover .tnl-card-badge { opacity: 1; }
   .tnl-business-card.expanded .tnl-card-overlay { transform: translateY(0); }
   .tnl-business-card.expanded .tnl-card-strip { opacity: 0; }
-  .tnl-card-badge { font-size: .5rem; max-width: calc(100% - 1.2rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .tnl-card-overlay { padding: .55rem; }
-  .tnl-card-ol-badge { font-size: .48rem; padding: .15rem .4rem; margin-bottom: .2rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .tnl-card-ol-name { font-size: .82rem; margin-bottom: .2rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .tnl-card-badge { font-size: .62rem; padding: .2rem .5rem; max-width: calc(100% - 1.2rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tnl-card-overlay { padding: .7rem; }
+  .tnl-card-ol-badge { font-size: .75rem; padding: .15rem .45rem; margin-bottom: .25rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tnl-card-ol-name { font-size: 1rem; margin-bottom: .25rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-weight: 700; }
   .tnl-card-ol-desc { display: none; }
-  .tnl-card-ol-meta { gap: .18rem; margin-bottom: .35rem; flex: 1; }
-  .tnl-card-ol-link { font-size: .6rem; line-height: 1.25; }
-  .tnl-card-ol-wa { padding: .4rem .5rem; font-size: .68rem; gap: .25rem; white-space: nowrap; }
+  .tnl-card-ol-meta { gap: .25rem; margin-bottom: .4rem; flex: 1; }
+  .tnl-card-ol-link { font-size: .78rem !important; line-height: 1.35; }
+  .tnl-card-ol-link svg, .tnl-card-ol-hora svg { width: 11px !important; height: 11px !important; flex-shrink: 0; }
+  .tnl-card-ol-hora { font-size: .82rem; line-height: 1.35; }
+  .tnl-card-ol-wa { padding: .55rem .65rem; font-size: .82rem; gap: .3rem; white-space: nowrap; border-radius: 2rem; font-weight: 700; }
 
   /* ── QUEM SOMOS ── */
   .tnl-qs-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -906,28 +930,49 @@ tr:hover td { background: rgba(255,255,255,.02); }
     padding: 3rem 1.25rem;
     flex-direction: column; align-items: flex-start; gap: 1.5rem;
   }
-  .tnl-cta-eyebrow { font-size: .7rem; }
+  .tnl-cta-eyebrow { font-size: .75rem; }
   .tnl-cta-title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
-  .tnl-cta-desc { font-size: .92rem; margin-top: .65rem; }
-  .tnl-btn-dark { width: 100%; justify-content: center; }
+  .tnl-cta-desc { font-size: .95rem; margin-top: .65rem; }
+  .tnl-btn-dark { width: 100%; justify-content: center; font-size: .95rem; padding: .85rem 1.5rem; }
 
   /* ── VAGAS ── */
   .tnl-vagas-grid { grid-template-columns: 1fr; gap: .75rem; }
   .tnl-vaga-card { flex-direction: row; align-items: center; gap: .875rem; padding: .875rem 1rem; }
   .tnl-vaga-card > .tnl-vaga-top { flex-direction: column; align-items: center; justify-content: flex-start; min-width: 48px; margin-bottom: 0; flex-shrink: 0; gap: .3rem; }
   .tnl-vaga-card > .tnl-vaga-top .tnl-vaga-badges { flex-direction: column; align-items: center; justify-content: center; gap: .2rem; }
-  .tnl-vaga-card > .tnl-vaga-top .tnl-vaga-emoji { font-size: 1.5rem; }
-  .tnl-vaga-card > .tnl-vaga-top .tnl-vaga-badge { font-size: .5rem; padding: .15rem .4rem; }
+  .tnl-vaga-card > .tnl-vaga-top .tnl-vaga-emoji { font-size: 1.6rem; }
+  .tnl-vaga-card > .tnl-vaga-top .tnl-vaga-badge { font-size: .75rem; padding: .18rem .5rem; }
   .tnl-vaga-card-body-mobile { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .2rem; }
-  .tnl-vaga-title { font-size: .93rem; }
-  .tnl-vaga-company { font-size: .77rem; }
+  .tnl-vaga-title { font-size: 1rem; }
+  .tnl-vaga-company { font-size: .82rem; }
   .tnl-vaga-desc { display: none; }
-  .tnl-vaga-meta { flex-direction: row; flex-wrap: wrap; gap: .3rem .65rem; margin: .1rem 0; }
-  .tnl-vaga-meta span { font-size: .66rem; }
-  .tnl-vaga-btn { margin-top: .35rem; padding: .45rem .875rem; font-size: .76rem; align-self: flex-start; border-radius: 2rem; }
+  .tnl-vaga-meta { flex-direction: row; flex-wrap: wrap; gap: .3rem .65rem; margin: .15rem 0; }
+  .tnl-vaga-meta span { font-size: .82rem; }
+  .tnl-vaga-btn { margin-top: .4rem; padding: .5rem .95rem; font-size: .82rem; align-self: flex-start; border-radius: 2rem; }
+
+  /* ── PODCAST ── */
+  .tnl-pod-item-img { width: 62px; height: 62px; }
+  .tnl-pod-item-title { font-size: .95rem; }
+  .tnl-pod-item-guest { font-size: .8rem; }
+  .tnl-pod-platform-btn { font-size: .8rem; padding: .45rem .9rem; }
+  .tnl-pod-feat-title { font-size: 1.1rem; }
+  .tnl-pod-guest { font-size: .85rem; }
+  .tnl-pod-meta span { font-size: .82rem; }
+
+  /* ── NOTÍCIAS ── */
+  .tnl-news-tag { font-size: .75rem; }
+  .tnl-news-title { font-size: 1.1rem; }
+  .tnl-news-excerpt { font-size: .88rem; }
+  .tnl-news-meta { font-size: .78rem; }
+
+  /* ── DEPOIMENTOS ── */
+  .tnl-dep-text { font-size: .95rem; }
+  .tnl-dep-name { font-size: .92rem; }
+  .tnl-dep-role { font-size: .78rem; }
 
   /* ── INSTAGRAM ── */
   .tnl-instagram-strip { padding: 3rem 1.25rem; }
+  .tnl-ig-handle { font-size: .85rem; }
   .tnl-ig-reel-card { flex: 0 0 220px; }
   .tnl-ig-reel-frame { width: 220px; height: 270px; border-radius: 12px; }
 
@@ -935,12 +980,13 @@ tr:hover td { background: rgba(255,255,255,.02); }
   .tnl-footer { padding: 3rem 1.25rem 0; }
   .tnl-footer-grid { grid-template-columns: 1fr; gap: 0; }
   .tnl-footer-brand { padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 1.5rem; }
+  .tnl-footer-desc { font-size: .9rem; }
   .tnl-footer-cols-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-bottom: 2rem; }
-  .tnl-footer-col h4 { font-size: .7rem; margin-bottom: .65rem; }
-  .tnl-footer-col a { font-size: .78rem; }
+  .tnl-footer-col h4 { font-size: .82rem; margin-bottom: .65rem; }
+  .tnl-footer-col a { font-size: .82rem; }
   .tnl-footer-col ul { gap: .4rem; }
   .tnl-footer-bottom { flex-direction: column; align-items: center; text-align: center; padding: 1rem 0 1.25rem; gap: .75rem; }
-  .tnl-footer-copy { font-size: .72rem; text-align: center; }
+  .tnl-footer-copy { font-size: .78rem; text-align: center; }
   .tnl-footer-socials { gap: .5rem; }
 
   /* ── FLOAT WPP ── */
@@ -1299,7 +1345,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Materiais Elétricos</span>
         <div class="tnl-card-ol-name">Migui</div>
         <div class="tnl-card-ol-desc">Materiais elétricos, ferramentas e soluções para obra e manutenção do seu lar.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Av. Mandaqui, 46 - Limão</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 8h–18h · Sáb 8h–13h</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=Av.%20Mandaqui%2C%2046%20-%20Lim%C3%A3o" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Av. Mandaqui, 46 - Limão</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 8h–18h · Sáb 8h–13h</span></div>
         <a class="tnl-card-ol-wa" href="https://wa.me/5511977631776" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg> Chamar no WhatsApp</a>
       </div>
     </div>
@@ -1314,7 +1360,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Jóias / Acessórios</span>
         <div class="tnl-card-ol-name">Fridali Shop</div>
         <div class="tnl-card-ol-desc">Joalheria contemporânea com peças únicas e acessórios de alto padrão para todos os estilos.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>24h — Loja Online</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Todos os dias</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=24h%20%E2%80%94%20Loja%20Online" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>24h — Loja Online</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Todos os dias</span></div>
         <a class="tnl-card-ol-wa tnl-card-ol-site" href="https://www.fridalishop.com" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg> Acesse o site</a>
       </div>
     </div>
@@ -1329,7 +1375,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Supermercado</span>
         <div class="tnl-card-ol-name">Compre Mais</div>
         <div class="tnl-card-ol-desc">Supermercado com 4 unidades no bairro. Tudo que você precisa perto de casa.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Firminópolis, 223 - Jd. Vista Alegre</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Todos os dias 7h–22h</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=Rua%20Firmin%C3%B3polis%2C%20223%20-%20Jd.%20Vista%20Alegre" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Firminópolis, 223 - Jd. Vista Alegre</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Todos os dias 7h–22h</span></div>
         <a class="tnl-card-ol-wa" href="https://wa.me/5511982418180" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg> Chamar no WhatsApp</a>
       </div>
     </div>
@@ -1344,7 +1390,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Saúde</span>
         <div class="tnl-card-ol-name">Pseq</div>
         <div class="tnl-card-ol-desc">Clínica de saúde com atendimento especializado para toda a família.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua José Kileber, 242 - Limão</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 8h–18h</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=Rua%20Jos%C3%A9%20Kileber%2C%20242%20-%20Lim%C3%A3o" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua José Kileber, 242 - Limão</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 8h–18h</span></div>
         <a class="tnl-card-ol-wa" href="https://wa.me/5511953395484" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg> Chamar no WhatsApp</a>
       </div>
     </div>
@@ -1359,7 +1405,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Alimentação</span>
         <div class="tnl-card-ol-name">Dom Capuchon</div>
         <div class="tnl-card-ol-desc">Gastronomia artesanal com duas unidades. Sabores únicos que conquistam o paladar.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Jaboatão, 180 - Casa Verde</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Ter–Dom 11h–22h</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=Rua%20Jaboat%C3%A3o%2C%20180%20-%20Casa%20Verde" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Jaboatão, 180 - Casa Verde</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Ter–Dom 11h–22h</span></div>
         <a class="tnl-card-ol-wa" href="https://wa.me/551127743746" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg> Chamar no WhatsApp</a>
       </div>
     </div>
@@ -1374,7 +1420,7 @@ tr:hover td { background: rgba(255,255,255,.02); }
         <span class="tnl-card-ol-badge">Educação</span>
         <div class="tnl-card-ol-name">Van Gogh</div>
         <div class="tnl-card-ol-desc">Escola criativa que desenvolve o potencial artístico e educacional dos alunos.</div>
-        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Atenágoras, 99 - Limão</a><a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 7h–18h · Sáb 8h–12h</a></div>
+        <div class="tnl-card-ol-meta"><a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=Rua%20Aten%C3%A1goras%2C%2099%20-%20Lim%C3%A3o" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Rua Atenágoras, 99 - Limão</a><span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Seg–Sex 7h–18h · Sáb 8h–12h</span></div>
         <a class="tnl-card-ol-wa" href="https://wa.me/551139661622" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg> Chamar no WhatsApp</a>
       </div>
     </div></div>
@@ -1945,8 +1991,8 @@ function renderCards() {
       ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chamar no WhatsApp`
       : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Acesse o site`;
     const metaHtml = [
-      n.end && `<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.end}</a>`,
-      n.hora && `<a class="tnl-card-ol-link" href="#"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${n.hora}</a>`
+      n.end && `<a class="tnl-card-ol-link tnl-card-ol-addr" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.end)}" target="_blank"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.end}</a>`,
+      n.hora && `<span class="tnl-card-ol-hora"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${n.hora}</span>`
     ].filter(Boolean).join('');
 
     const logoHtml = n.logo
